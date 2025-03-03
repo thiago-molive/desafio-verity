@@ -1,4 +1,5 @@
 ﻿using EasyCash.Domain.Abstractions.Messaging.Commands;
+using FluentValidation;
 
 namespace EasyCash.Command.CashFlow.Create;
 
@@ -6,7 +7,14 @@ internal sealed class CreateNewCashFlowCommandHandler : ICommandHandler<CreateNe
 {
     public Task<CreateNewCashFlowCommandResult> Handle(CreateNewCashFlowCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(new CreateNewCashFlowCommandResult());
     }
 }
 
+internal sealed class CreateNewCashFlowCommandValidator : AbstractValidator<CreateNewCashFlowCommand>
+{
+    public CreateNewCashFlowCommandValidator()
+    {
+
+    }
+}
