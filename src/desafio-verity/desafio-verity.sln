@@ -11,31 +11,39 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{78C10F40-1DC9-4FEE-9284-4995FC8BC3E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Command", "EasyCash.Command\EasyCash.Command.csproj", "{80779709-7B12-4C3B-8F13-735F9F6F1591}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Command", "EasyCash.Command\EasyCash.Command.csproj", "{80779709-7B12-4C3B-8F13-735F9F6F1591}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Query", "EasyCash.Query\EasyCash.Query.csproj", "{44168816-EF01-4B69-B0CD-25B970C0BD4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Query", "EasyCash.Query\EasyCash.Query.csproj", "{44168816-EF01-4B69-B0CD-25B970C0BD4D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{044BE5E9-C290-46FB-AC56-4744C23C92F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Command.Store", "EasyCash.Command.Store\EasyCash.Command.Store.csproj", "{95A16638-10BE-484D-BC91-8AE6BF97B6CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Command.Store", "EasyCash.Command.Store\EasyCash.Command.Store.csproj", "{95A16638-10BE-484D-BC91-8AE6BF97B6CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Query.Store", "EasyCash.Query.Store\EasyCash.Query.Store.csproj", "{544F21F4-CC23-4182-8A4F-0CDC7C87EBE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Query.Store", "EasyCash.Query.Store\EasyCash.Query.Store.csproj", "{544F21F4-CC23-4182-8A4F-0CDC7C87EBE7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{CE570519-DE82-432D-B214-EC61CA96607E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integrations", "{FEB8FBA2-AB6C-4C15-9111-8DB4A943F098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Api", "EasyCash.Api\EasyCash.Api.csproj", "{48BE8536-0489-417B-B46D-6C25C5D103D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Api", "EasyCash.Api\EasyCash.Api.csproj", "{48BE8536-0489-417B-B46D-6C25C5D103D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Redis.Provider", "EasyCash.Redis.Provider\EasyCash.Redis.Provider.csproj", "{3C1B6313-4D61-471D-8555-F9C3B2AE4F90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Redis.Provider", "EasyCash.Redis.Provider\EasyCash.Redis.Provider.csproj", "{3C1B6313-4D61-471D-8555-F9C3B2AE4F90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Background.Jobs", "EasyCash.Background.Jobs\EasyCash.Background.Jobs.csproj", "{A26C7FA1-9963-44A4-BD46-ABCABB525EEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Background.Jobs", "EasyCash.Background.Jobs\EasyCash.Background.Jobs.csproj", "{A26C7FA1-9963-44A4-BD46-ABCABB525EEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Domain", "EasyCash.Domain\EasyCash.Domain.csproj", "{680D3C9B-87A5-4196-BBBE-54EE979B0B1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Domain", "EasyCash.Domain\EasyCash.Domain.csproj", "{680D3C9B-87A5-4196-BBBE-54EE979B0B1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Unit.Tests", "EasyCash.Unit.Tests\EasyCash.Unit.Tests.csproj", "{87909CD9-79FB-4F7A-BD50-835AAF74EF51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Unit.Tests", "EasyCash.Unit.Tests\EasyCash.Unit.Tests.csproj", "{87909CD9-79FB-4F7A-BD50-835AAF74EF51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Integration.Tests", "EasyCash.Integration.Tests\EasyCash.Integration.Tests.csproj", "{BFE8B867-A6AC-441F-87C8-23FADB229E48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Integration.Tests", "EasyCash.Integration.Tests\EasyCash.Integration.Tests.csproj", "{BFE8B867-A6AC-441F-87C8-23FADB229E48}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.HealthCheck.Provider", "EasyCash.HealthCheck.Provider\EasyCash.HealthCheck.Provider.csproj", "{7AB981AB-4E3D-4A7B-933A-E54F2ABD6E20}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.ArchitectureTests", "EasyCash.ArchitectureTests\EasyCash.ArchitectureTests.csproj", "{90CF1117-1F25-459B-8512-DAC9BDCCC656}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyCash.Dapper.Provider", "EasyCash.Dapper.Provider\EasyCash.Dapper.Provider.csproj", "{D2002DB3-0B5D-49BE-ABED-43C96E5A5AE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.OpenTelemetry", "EasyCash.OpenTelemetry\EasyCash.OpenTelemetry.csproj", "{57A662A1-73F1-4D23-B50C-E55723687DAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +91,22 @@ Global
 		{BFE8B867-A6AC-441F-87C8-23FADB229E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFE8B867-A6AC-441F-87C8-23FADB229E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFE8B867-A6AC-441F-87C8-23FADB229E48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AB981AB-4E3D-4A7B-933A-E54F2ABD6E20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AB981AB-4E3D-4A7B-933A-E54F2ABD6E20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AB981AB-4E3D-4A7B-933A-E54F2ABD6E20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AB981AB-4E3D-4A7B-933A-E54F2ABD6E20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90CF1117-1F25-459B-8512-DAC9BDCCC656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90CF1117-1F25-459B-8512-DAC9BDCCC656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90CF1117-1F25-459B-8512-DAC9BDCCC656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90CF1117-1F25-459B-8512-DAC9BDCCC656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2002DB3-0B5D-49BE-ABED-43C96E5A5AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2002DB3-0B5D-49BE-ABED-43C96E5A5AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2002DB3-0B5D-49BE-ABED-43C96E5A5AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2002DB3-0B5D-49BE-ABED-43C96E5A5AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A662A1-73F1-4D23-B50C-E55723687DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A662A1-73F1-4D23-B50C-E55723687DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A662A1-73F1-4D23-B50C-E55723687DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A662A1-73F1-4D23-B50C-E55723687DAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +125,10 @@ Global
 		{680D3C9B-87A5-4196-BBBE-54EE979B0B1F} = {B14D149A-9EA1-480F-AD3B-9ABEF5BEAC86}
 		{87909CD9-79FB-4F7A-BD50-835AAF74EF51} = {78C10F40-1DC9-4FEE-9284-4995FC8BC3E1}
 		{BFE8B867-A6AC-441F-87C8-23FADB229E48} = {78C10F40-1DC9-4FEE-9284-4995FC8BC3E1}
+		{7AB981AB-4E3D-4A7B-933A-E54F2ABD6E20} = {FEB8FBA2-AB6C-4C15-9111-8DB4A943F098}
+		{90CF1117-1F25-459B-8512-DAC9BDCCC656} = {78C10F40-1DC9-4FEE-9284-4995FC8BC3E1}
+		{D2002DB3-0B5D-49BE-ABED-43C96E5A5AE6} = {FEB8FBA2-AB6C-4C15-9111-8DB4A943F098}
+		{57A662A1-73F1-4D23-B50C-E55723687DAA} = {FEB8FBA2-AB6C-4C15-9111-8DB4A943F098}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {818D0348-C42A-42F1-8DA9-9F881A997FB7}

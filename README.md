@@ -51,6 +51,11 @@ consolidado diário cair.
     - Redis streams para mensageria para garantir resiliência nas aplicações garantindo que caso tenha alguma indisponibilidade nenhuma mensagem seja perdida e possa ser consumida quando a aplicação voltar a ficar online.
     - Não vejo sentido em cogitar qualquer outra ferramenta para cache distribuido. (definiremos estratégias de cache posteriormente em cada funcionalidade.)
 
+# Observabilidade
+
+    - Vai ser usado o padrão CNCF OpenTelemetry para escoamento de metricas, logs e traces, o open telemetry é open source, um dos maiores projetos da CNCF junto, não é vendor lock-in, pode escoar logs pra qualquer vendor do mercado e é amplamente utilizado .
+    - Utiliza o aspire dashboard para visualiação. Para abrir o aspire dashboard http://localhost:18888/ e obter o token do log do aspire ``` docker logs easycash-aspire-dashboard ``` procurar por algo como http://0.0.0.0:18888/login?t=0eb9b5e395470399e4d0b06d9bb6e65a onde o ``` 0eb9b5e395470399e4d0b06d9bb6e65a ``` é o token a ser utilizado.
+
 # Design do Software
 
 - ** Estrutura de pastas **
@@ -79,10 +84,12 @@ Tests
 - Entity Framework Core para persistência de dados
     - ef core migrations para aplicar mudanças no banco de dados
 - Dapper para queries de consulta
-- Usarei o pacote MediatR por ser fácil e ter as funcionalidaes que preciso para enviar requisições, eventos e ter os behaviors que usarei para algumas funcionalidades.
-- Transaction outbox irá rodar em um job no quarkus em uma cron job
-- A aplicação de EasyCash.Api irá utilizar o database EasyCash e EasyCash.Report.Api irá utilizar EasyCash_Report
-- Irá utilizar injeção de dependencia nativa do .net core
+- O pacote MediatR está sendo utiliado por ser fácil e ter as funcionalidaes que preciso para enviar requisições, eventos e ter os behaviors que usarei para algumas funcionalidades.
+- Transaction outbox roda em um job no quarkus em uma cron job
+- A aplicação de EasyCash.Api utiliza o database EasyCash e EasyCash.Report.Api irá utilizar EasyCash_Report
+- utiliza injeção de dependencia nativa do .net core
+- Health checks no endpoint /health para que o service discovery possa identificar corretamente a aplicação saudavel, verificando acesso a banco de dados, redis e identity provider
+- Open
 
 
 ## Diagrama de auto nível

@@ -1,0 +1,51 @@
+version: '3.4'
+
+services:
+  # easycash.api:
+  #   image: ${DOCKER_REGISTRY-}easycashapi
+  #   container_name: EasyCash.Api
+  #   build:
+  #     context: .
+  #     dockerfile: EasyCash.Api/Dockerfile
+  #   depends_on:
+  #     - easycash-db
+
+  easycash-db:
+    image: postgres:latest
+    container_name: easycash.Db
+    environment:
+      - POSTGRES_DB=easycash
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    # volumes:
+    #   - ./.containers/database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  easycash-idp:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: easycash.Identity
+    command: start-dev --import-realm
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    volumes:
+      #- ./.containers/identity:/opt/keycloak/data
+      - ./.files/easycash-realm-export.json:/opt/keycloak/data/import/realm.json
+    ports:
+      - 18080:8080
+
+  easycash-redis:
+    image: redis:latest
+    container_name: easycash.Redis
+    restart: always
+    ports:
+      - '6379:6379'
+
+  easycash-aspire-dashboard:
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:latest
+    container_name: easycash-aspire-dashboard
+    ports:
+      - "18888:18888"
+      - "4317:18889"
+    restart: always
