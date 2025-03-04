@@ -1,6 +1,8 @@
 ﻿using EasyCash.Dapper.Provider;
 using EasyCash.Query.CashFlow.Interfaces;
 using EasyCash.Query.Store.CashFlow;
+using EasyCash.Query.Store.Users;
+using EasyCash.Query.Users.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +17,8 @@ public static class DependencyInjection
         services.AddInfrastructureDapperProvider(configuration);
 
         services.AddTransient<ITransactionQueryStore, TransactionQueryStore>();
+
+        services.AddScoped<IUserQueryStore, UserQueryStore>();
 
         return services;
     }

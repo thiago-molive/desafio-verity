@@ -19,6 +19,10 @@ internal sealed class TransactionEntityConfiguration : IEntityTypeConfiguration<
 
         builder.Property(transaction => transaction.Date)
             .HasComment("Date of the transaction")
+            .HasConversion(
+                v => v.UtcDateTime,
+                v => new DateTimeOffset(v, TimeSpan.Zero)
+            )
             .IsRequired();
 
         builder.Property(transaction => transaction.Description)
@@ -42,10 +46,18 @@ internal sealed class TransactionEntityConfiguration : IEntityTypeConfiguration<
 
         builder.Property(transaction => transaction.CreatedAt)
             .HasComment("Date when the transaction was created")
+            .HasConversion(
+                v => v.UtcDateTime,
+                v => new DateTimeOffset(v, TimeSpan.Zero)
+            )
             .IsRequired();
 
         builder.Property(transaction => transaction.UpdatedAt)
             .HasComment("Date when the transaction was updated")
+            .HasConversion(
+                v => v.Value.UtcDateTime,
+                v => new DateTimeOffset(v, TimeSpan.Zero) 
+            )
             .IsRequired(false);
 
         builder.Property(x => x.RowVersion)

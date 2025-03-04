@@ -3,11 +3,13 @@ using EasyCash.Api.ConsumerInitializer;
 using EasyCash.Api.Extensions;
 using EasyCash.Api.OpenApi;
 using EasyCash.Api.Policyes;
+using EasyCash.Authorization.Provider;
 using EasyCash.Background.Jobs;
 using EasyCash.Command;
 using EasyCash.Command.Store;
 using EasyCash.Domain.Abstractions;
 using EasyCash.HealthCheck.Provider;
+using EasyCash.Keycloak.Identity.Provider;
 using EasyCash.Query;
 using EasyCash.Query.Store;
 using EasyCash.Redis.Provider;
@@ -27,6 +29,8 @@ builder.Services.AddInfrastructureQueryStore(builder.Configuration);
 builder.Services.AddInfrastructureHealthCheckProvider(builder.Configuration);
 builder.Services.AddInfrastructureCachingProvider(builder.Configuration);
 builder.Services.AddInfrastructureBackgroundJobs(builder.Configuration);
+builder.Services.AddInfrastructureAuthentication(builder.Configuration);
+builder.Services.AddInfrastructureAuthorization();
 
 builder.Services.AddSingleton<IIntegrationConsumerInitializer, IntegrationConsumerInitializer>();
 

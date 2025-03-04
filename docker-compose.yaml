@@ -1,22 +1,22 @@
 services:
-  easycash.api:
-    container_name: EasyCash.Api
-    build:
-      context: ./src/desafio-verity
-      dockerfile: EasyCash.Api/Dockerfile
-    ports:
-      - 8080:8080
-    depends_on:
-      - easycash-db
-      - easycash-idp
-      - easycash-redis
-      - easycash-aspire-dashboard
-    environment:
-      - ASPNETCORE_HTTP_PORTS=8080
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://easycash-aspire-dashboard:18889
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
-    command: ["dockerize", "-wait", "tcp://easycash-db:5432", "-wait", "tcp://easycash-idp:8080", "-wait", "tcp://easycash-redis:6379", "-wait", "tcp://easycash-aspire-dashboard:18888", "-timeout", "30s", "dotnet", "EasyCash.Api.dll"]
+  # easycash.api:
+  #   container_name: EasyCash.Api
+  #   build:
+  #     context: ./src/desafio-verity
+  #     dockerfile: EasyCash.Api/Dockerfile
+  #   ports:
+  #     - 8080:8082
+  #   depends_on:
+  #     - easycash-db
+  #     - easycash-idp
+  #     - easycash-redis
+  #     - easycash-aspire-dashboard
+  #   environment:
+  #     - ASPNETCORE_HTTP_PORTS=8082
+  #     - OTEL_EXPORTER_OTLP_ENDPOINT=http://easycash-aspire-dashboard:18889
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=http://+:8082
+  #   command: ["dockerize", "-wait", "tcp://easycash-db:5432", "-wait", "tcp://easycash-idp:8080", "-wait", "tcp://easycash-redis:6379", "-wait", "tcp://easycash-aspire-dashboard:18888", "-timeout", "30s", "dotnet", "EasyCash.Api.dll"]
 
   easycash-db:
     image: postgres:latest

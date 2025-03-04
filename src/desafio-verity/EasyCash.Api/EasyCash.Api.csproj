@@ -22,11 +22,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EasyCash.Authorization.Provider\EasyCash.Authorization.Provider.csproj" />
     <ProjectReference Include="..\EasyCash.Background.Jobs\EasyCash.Background.Jobs.csproj" />
     <ProjectReference Include="..\EasyCash.Command.Store\EasyCash.Command.Store.csproj" />
     <ProjectReference Include="..\EasyCash.Command\EasyCash.Command.csproj" />
     <ProjectReference Include="..\EasyCash.Domain\EasyCash.Domain.csproj" />
     <ProjectReference Include="..\EasyCash.HealthCheck.Provider\EasyCash.HealthCheck.Provider.csproj" />
+    <ProjectReference Include="..\EasyCash.Keycloak.Identity.Provider\EasyCash.Keycloak.Identity.Provider.csproj" />
     <ProjectReference Include="..\EasyCash.OpenTelemetry\EasyCash.OpenTelemetry.csproj" />
     <ProjectReference Include="..\EasyCash.Query.Store\EasyCash.Query.Store.csproj" />
     <ProjectReference Include="..\EasyCash.Query\EasyCash.Query.csproj" />

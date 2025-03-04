@@ -1,7 +1,10 @@
 # como rodar localmente
-- tenha certeza de que possui o docker instalado, caso não possua pode seguir um tutorial: [instação docker](https://github.com/codeedu/wsl2-docker-quickstart)
-- na pasta raiz do projeto tem um docker-compose, então abra no terminal ou powershell e rode o commando ``` docker-compose up -d --build ```
-- O projeto irá estar rodando em http
+- tenha certeza de que possui o docker com docker-compose instalado, caso não possua pode seguir um tutorial: [instação docker](https://github.com/codeedu/wsl2-docker-quickstart)
+- na pasta raiz do projeto tem um docker-compose, então abra no terminal ou powershell e rode o commando ``` docker-compose up -d ``` e rode o projeto pelo visual studio usando o kestrel **(não pelo docker por causa do keycloak, teria que alterar as configurações do client)**.
+- Aguarde um pouco até os serviços iniciarem, pode demorar um pouco na primeira vez.
+- O projeto irá estar rodando em ``` https://localhost:7152/swagger ```
+
+- Deixei um seed para criar um usuario, pode logar com o user: test@easycash.com.br e senha: 123456 ou pode criar um user direto no swagger (em select a definition trocar para users).
 
 ## Desafio proposto:
 
@@ -38,6 +41,7 @@ consolidado diário cair.
     - Consistência eventual não será um problema pra esse tipo de aplicação, visto que a consolidação é diária.
 - Para arquitetura eu decidi usar clean architecture (mesmo sendo uma aplicação simples), assim tenho cada camada e responsabilidade bem definida e fica mais fácil saber onde está cada coisa pela sua responsabilidade.
 - Para autenticação quero utilizar um servidor de identidade como fonte da verdade para a parte de autenticação
+- Para autorização implementei direto na aplicação para ter mais controle sobre o fluxo de autorização e não expoe as permissoes via bearer token
 - Para o dominio irei usar DDD (Domain Driven Design), também para fins de organização, legibilidade e melhor manutenção, baixo acoplamento, encapsulamento, testes entre outros benefícios.
 - Junto com o DDD irei utilizar (EDA) (Event driven arquitecture) para disparar eventos, possibilitando integração entre dominios de forma desacoplada e fluxos de dados menos complexos.
 - Para os eventos emitidos irei utilizar o pattern transaction outbox, persistindo as mensagens no banco de dados e processando-as fora da requisição original.
@@ -58,7 +62,8 @@ consolidado diário cair.
 
 ## Segurança
 
-- possui autenticação e autorização com identity provider, garantindo que apenas quem tem acesso e autorização possa realizar operações.
+- possui autenticação com identity provider que serve como fonte da verdade para dizer quem é o user que está altenticando e podendo gerenciar pelo keycloak.
+- possui autorização na aplicação
 - para ataques conhecidos e listados no OWASP optei por deixar a parte de segurança a cargo de um api gateway na borda da infraestrutura, api's gateways já são projetados e atualizos para mitigar problemas conhecidos e diante de tantas funcionalidades que um api gateway entrega não faz sentido reinventar a roda.
 
 # Definindo o tipo de banco de dados:

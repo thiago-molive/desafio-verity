@@ -1,13 +1,15 @@
 using Asp.Versioning;
 using EasyCash.Api.Middleware;
+using EasyCash.Authorization.Provider.Authorization;
 using EasyCash.Command.CashFlow.Create;
+using EasyCash.Domain.Abstractions.Authorization;
+using EasyCash.Query.CashFlow.Get;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Net;
-using EasyCash.Query.CashFlow.Get;
 
-namespace EasyCash.Api.Controllers;
+namespace EasyCash.Api.Controllers.CashFlow;
 
 [ApiController]
 [ApiVersion(ApiVersions.V1)]
@@ -26,7 +28,7 @@ public class CashFlowsController : ControllerBase
     }
 
     [HttpPost]
-    // [HasPermission(PermissionsConsts.Admin)]
+    [HasPermission(PermissionsConsts.Collaborator)]
     [ProducesResponseType(typeof(CreateTransactionCommandResult), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.InternalServerError)]
@@ -38,7 +40,7 @@ public class CashFlowsController : ControllerBase
     }
 
     [HttpGet]
-    // [HasPermission(PermissionsConsts.Admin)]
+    [HasPermission(PermissionsConsts.Collaborator)]
     [ProducesResponseType(typeof(GetDailyTransactionsQueryResult), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.InternalServerError)]
