@@ -1,14 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace EasyCash.Domain.Abstractions.Messaging.Commands;
 
-namespace EasyCash.Domain.Abstractions.Messaging.Commands;
-
-public interface IIdempotencyCommand<out TCommandResult> : ICommand<TCommandResult>, IIdempotency
+public abstract class IdempotencyCommandBase<TCommandResult> : ICommand<TCommandResult>, IIdempotency
     where TCommandResult : ICommandResult
 {
+    public string IdempotencyKey { get; set; }
 }
 
 public interface IIdempotency
 {
-    [Required]
     public string IdempotencyKey { get; set; }
 }

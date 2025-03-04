@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using EasyCash.Domain.Interfaces;
+using EasyCash.Domain.Abstractions.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -67,7 +67,7 @@ namespace EasyCash.Command.Store.Migrations
                     b.ToTable("outbox_messages", (string)null);
                 });
 
-            modelBuilder.Entity("EasyCash.Domain.Idempotency.Entity.IdempotencyEntity", b =>
+            modelBuilder.Entity("EasyCash.Domain.Abstractions.Idempotency.Entity.IdempotencyEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text")
@@ -94,6 +94,69 @@ namespace EasyCash.Command.Store.Migrations
                         .HasDatabaseName("ix_idempotent_messages_id");
 
                     b.ToTable("idempotent_messages", (string)null);
+                });
+
+            modelBuilder.Entity("EasyCash.Domain.CashFlow.Entities.TransactionEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount")
+                        .HasComment("Amount of the transaction");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("category")
+                        .HasComment("Category of the transaction");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasComment("Date when the transaction was created");
+
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date")
+                        .HasComment("Date of the transaction");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("description")
+                        .HasComment("Description of the transaction");
+
+                    b.Property<long>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("row_version")
+                        .HasDefaultValueSql("1")
+                        .HasComment("Concurrency Token");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("type")
+                        .HasComment("Type of the transaction");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at")
+                        .HasComment("Date when the transaction was updated");
+
+                    b.HasKey("Id")
+                        .HasName("pk_transactions");
+
+                    b.HasIndex("Date")
+                        .HasDatabaseName("ix_transactions_date");
+
+                    b.ToTable("transactions", (string)null);
                 });
 #pragma warning restore 612, 618
         }

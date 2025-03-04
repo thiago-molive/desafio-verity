@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EasyCash.Domain\EasyCash.Domain.csproj" />
+    <ProjectReference Include="..\EasyCash.Redis.Provider\EasyCash.Redis.Provider.csproj" />
   </ItemGroup>
 
 </Project>

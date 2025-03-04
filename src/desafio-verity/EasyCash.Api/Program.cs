@@ -1,10 +1,12 @@
 using Asp.Versioning.ApiExplorer;
+using EasyCash.Api.ConsumerInitializer;
 using EasyCash.Api.Extensions;
 using EasyCash.Api.OpenApi;
 using EasyCash.Api.Policyes;
 using EasyCash.Background.Jobs;
 using EasyCash.Command;
 using EasyCash.Command.Store;
+using EasyCash.Domain.Abstractions;
 using EasyCash.HealthCheck.Provider;
 using EasyCash.Query;
 using EasyCash.Query.Store;
@@ -25,6 +27,8 @@ builder.Services.AddInfrastructureQueryStore(builder.Configuration);
 builder.Services.AddInfrastructureHealthCheckProvider(builder.Configuration);
 builder.Services.AddInfrastructureCachingProvider(builder.Configuration);
 builder.Services.AddInfrastructureBackgroundJobs(builder.Configuration);
+
+builder.Services.AddSingleton<IIntegrationConsumerInitializer, IntegrationConsumerInitializer>();
 
 builder.Services.ConfigureCors();
 var assembliesToScan = new[]

@@ -1,7 +1,9 @@
 ﻿using EasyCash.Command.Store.Contexts;
+using EasyCash.Command.Store.Repositories.CashFlow.Transactions;
 using EasyCash.Command.Store.Repositories.Idempotency;
-using EasyCash.Domain.Idempotency.Interfaces;
-using EasyCash.Domain.Interfaces;
+using EasyCash.Domain.Abstractions.Idempotency.Interfaces;
+using EasyCash.Domain.Abstractions.Interfaces;
+using EasyCash.Domain.CashFlow.Interfaces;
 using EntityFramework.Exceptions.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +26,7 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddScoped<IIdempotencyCommandStore, IdempotencyCommandStore>();
+        services.AddScoped<ITransactionsCommandStore, TransactionsCommandStore>();
 
         return services;
     }

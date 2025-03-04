@@ -1,6 +1,6 @@
 ﻿using EasyCash.Command.Store.SaveChangesBehaviors;
-using EasyCash.Domain.Exceptions;
-using EasyCash.Domain.Interfaces;
+using EasyCash.Domain.Abstractions.Exceptions;
+using EasyCash.Domain.Abstractions.Interfaces;
 using EntityFramework.Exceptions.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;

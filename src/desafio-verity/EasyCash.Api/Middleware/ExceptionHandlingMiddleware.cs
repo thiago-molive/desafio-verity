@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using EasyCash.Domain.Exceptions;
+using EasyCash.Domain.Abstractions.Exceptions;
 
 namespace EasyCash.Api.Middleware;
 

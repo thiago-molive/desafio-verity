@@ -1,4 +1,5 @@
-﻿using EasyCash.Background.Jobs.Outbox;
+﻿using EasyCash.Background.Jobs.IntegrationEventsConsumer;
+using EasyCash.Background.Jobs.Outbox;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
@@ -21,5 +22,7 @@ public static class DependencyInjection
         services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
 
         services.ConfigureOptions<ProcessOutboxMessagesJobSetup>();
+
+        services.AddHostedService<IntegrationEventConsumerJob>();
     }
 }

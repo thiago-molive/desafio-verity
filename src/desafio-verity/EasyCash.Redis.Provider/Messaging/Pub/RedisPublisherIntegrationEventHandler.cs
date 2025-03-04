@@ -1,5 +1,5 @@
 ﻿using EasyCash.Domain.Abstractions;
-using EasyCash.Domain.Interfaces;
+using EasyCash.Domain.Abstractions.Interfaces;
 using StackExchange.Redis;
 using System.Text.Json;
 
@@ -14,7 +14,7 @@ public sealed class RedisPublisherIntegrationEventHandler<TEvent> : IIntegration
         _redis = redis;
     }
 
-    public async Task Handle(TEvent message, CancellationToken cancellationToken)
+    public async Task Send(TEvent message, CancellationToken cancellationToken)
     {
         var db = _redis.GetDatabase();
         var messageJson = JsonSerializer.Serialize(message);

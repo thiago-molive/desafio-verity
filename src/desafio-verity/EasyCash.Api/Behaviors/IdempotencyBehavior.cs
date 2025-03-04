@@ -1,6 +1,6 @@
-﻿using EasyCash.Domain.Abstractions.Messaging.Commands;
-using EasyCash.Domain.Idempotency.Entity;
-using EasyCash.Domain.Idempotency.Interfaces;
+﻿using EasyCash.Domain.Abstractions.Idempotency.Entity;
+using EasyCash.Domain.Abstractions.Idempotency.Interfaces;
+using EasyCash.Domain.Abstractions.Messaging.Commands;
 using MediatR;
 using Newtonsoft.Json;
 
@@ -8,7 +8,7 @@ namespace EasyCash.Api.Behaviors;
 
 internal sealed class IdempotencyBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IIdempotencyCommand<TResponse>
+    where TRequest : IdempotencyCommandBase<TResponse>
     where TResponse : ICommandResult
 {
     private readonly IIdempotencyCommandStore _idempotencyCommandStore;

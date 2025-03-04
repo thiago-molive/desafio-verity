@@ -92,6 +92,7 @@ Tests/
 - Para autenticação e autorização considerei utilizar o proprio identity já disponível no .net core, mas por familiaridade vou utilizar o keycloak
 - Entity Framework Core para persistência de dados
     - ef core migrations para aplicar mudanças no banco de dados
+- Utilização de pattern UnitOfWork para centralzar modificações em banco de dados em um só local.
 - Dapper para queries de consulta
 - O pacote MediatR está sendo utiliado por ser fácil e ter as funcionalidaes que preciso para enviar requisições, eventos e ter os behaviors que usarei para algumas funcionalidades.
 - Transaction outbox roda em um job no quarkus em uma cron job
@@ -105,6 +106,53 @@ Tests/
 -- Assets/diagrama-macro.drawio
 
 ![Texto alternativo](assets/macro.jpg)
+
+## Command flow pelos pipelines de requisição
+
+```mermaid
+sequenceDiagram
+    participant Cliente as Cliente (API)
+    participant Mediator as Mediator (MediatR)
+    participant Logging as LoggingBehavior
+    participant Validation as ValidationBehavior
+    participant Idempotency as IdempotencyBehavior
+    participant Transactional as TransactionalBehavior
+    participant Handler as Command Handler
+    
+    Cliente->>Mediator: Envia requisição (Command)
+    Mediator->>Logging: Passa pelo LoggingBehavior
+    Logging->>Validation: Continua para ValidationBehavior
+    Validation->>Idempotency: Continua para IdempotencyBehavior
+    Idempotency->>Transactional: Continua para TransactionalBehavior
+    Transactional->>Handler: Chama o Handler
+    Handler-->>Transactional: Retorna resultado
+    Transactional-->>Idempotency: Continua fluxo
+    Idempotency-->>Validation: Continua fluxo
+    Validation-->>Logging: Continua fluxo
+    Logging-->>Mediator: Continua fluxo
+    Mediator-->>Cliente: Envia resposta final
+```
+
+## Query flow pelos pipelines de requisição
+
+```mermaid
+sequenceDiagram
+    participant Cliente as Cliente (API)
+    participant Mediator as Mediator (MediatR)
+    participant Logging as LoggingBehavior
+    participant Validation as ValidationBehavior
+    participant Handler as Query Handler
+    
+    Cliente->>Mediator: Envia requisição (Query)
+    Mediator->>Logging: Passa pelo LoggingBehavior
+    Logging->>Validation: Continua para ValidationBehavior
+    Validation->>Handler: Chama o Handler da Query
+    Handler-->>Validation: Retorna resultado
+    Validation-->>Logging: Continua fluxo
+    Logging-->>Mediator: Continua fluxo
+    Mediator-->>Cliente: Envia resposta final
+
+```
 
 
 ## Diagrama sequencia requests (sem autenticação/autorização)
@@ -131,6 +179,32 @@ sequenceDiagram
 
 ```
 
+## Diagrama de chamadas com idempotencia
+
+```mermaid
+sequenceDiagram
+    participant Cliente as Cliente (API)
+    participant Mediator as Mediator (MediatR)
+    participant IdempotencyBehavior as IdempotencyBehavior
+    participant Redis as Redis (Idempotency Store)
+    participant CQRS as Command Handler
+    
+    Cliente->>Mediator: Envia requisição (Command)
+    Mediator->>IdempotencyBehavior: Passa pelo IdempotencyBehavior
+    IdempotencyBehavior->>Redis: Verifica idempotencyKey
+    alt Chave já existe
+        Redis-->>IdempotencyBehavior: Retorna resposta salva
+        IdempotencyBehavior-->>Mediator: Retorna resposta
+        Mediator-->>Cliente: Envia resposta final
+    else Nova requisição
+        Redis-->>IdempotencyBehavior: Não encontrado, continua fluxo
+        IdempotencyBehavior->>CQRS: Chama o Handler correto
+        CQRS-->>IdempotencyBehavior: Retorna resultado
+        IdempotencyBehavior-->>Mediator: Continua fluxo
+        Mediator-->>Cliente: Envia resposta final
+    end
+
+```
 
 ## Diagrama sequencia UnitOfWork
 
@@ -181,33 +255,6 @@ sequenceDiagram
     CronJob->>Handler: Dispara evento para o handler correspondente
     Handler-->>CronJob: Confirma processamento do evento
     CronJob->>Outbox: Marca evento como processado
-
-```
-
-## Diagrama de chamadas com idempotencia
-
-```mermaid
-sequenceDiagram
-    participant Cliente as Cliente (API)
-    participant Mediator as Mediator (MediatR)
-    participant IdempotencyBehavior as IdempotencyBehavior
-    participant Redis as Redis (Idempotency Store)
-    participant CQRS as Command Handler
-    
-    Cliente->>Mediator: Envia requisição (Command)
-    Mediator->>IdempotencyBehavior: Passa pelo IdempotencyBehavior
-    IdempotencyBehavior->>Redis: Verifica idempotencyKey
-    alt Chave já existe
-        Redis-->>IdempotencyBehavior: Retorna resposta salva
-        IdempotencyBehavior-->>Mediator: Retorna resposta
-        Mediator-->>Cliente: Envia resposta final
-    else Nova requisição
-        Redis-->>IdempotencyBehavior: Não encontrado, continua fluxo
-        IdempotencyBehavior->>CQRS: Chama o Handler correto
-        CQRS-->>IdempotencyBehavior: Retorna resultado
-        IdempotencyBehavior-->>Mediator: Continua fluxo
-        Mediator-->>Cliente: Envia resposta final
-    end
 
 ```
 

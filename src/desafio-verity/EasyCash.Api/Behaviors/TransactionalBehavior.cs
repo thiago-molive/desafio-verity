@@ -1,5 +1,5 @@
-﻿using EasyCash.Domain.Abstractions.Messaging.Commands;
-using EasyCash.Domain.Interfaces;
+﻿using EasyCash.Domain.Abstractions.Interfaces;
+using EasyCash.Domain.Abstractions.Messaging.Commands;
 using MediatR;
 using System.Data;
 

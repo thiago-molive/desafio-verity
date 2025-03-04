@@ -1,7 +1,7 @@
-﻿using EasyCash.Domain.Interfaces;
-using EasyCash.Domain;
+﻿using EasyCash.Domain;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using EasyCash.Domain.Abstractions.Interfaces;
 
 namespace EasyCash.Command;
 

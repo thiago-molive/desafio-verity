@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Interfaces;
+﻿using EasyCash.Domain.Abstractions.Interfaces;
 using System.Data;
 
 namespace EasyCash.Api.Extensions;

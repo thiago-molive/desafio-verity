@@ -26,10 +26,10 @@ public class CashFlowsController : ControllerBase
 
     [HttpPost]
     // [HasPermission(PermissionsConsts.Admin)]
-    [ProducesResponseType(typeof(CreateNewCashFlowCommandResult), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(CreateTransactionCommandResult), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.InternalServerError)]
-    public async Task<IActionResult> AddCategory([FromBody] CreateNewCashFlowCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> AddCategory([FromBody] CreateTransactionCommand command, CancellationToken cancellationToken)
     {
         var result = await _sender.Send(command, cancellationToken);
 

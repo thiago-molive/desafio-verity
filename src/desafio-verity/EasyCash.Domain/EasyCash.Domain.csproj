@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <Folder Include="Abstractions\Messaging\Events\" />
+    <Folder Include="CashFlow\Enums\" />
+    <Folder Include="CashFlow\Interfaces\" />
   </ItemGroup>
 
 </Project>
