@@ -1,7 +1,7 @@
 ﻿using EasyCash.Domain.Abstractions.Messaging.Queries.PagedQueries;
 using EasyCash.Domain.CashFlow.Enums;
 
-namespace EasyCash.Query.CashFlow.Get;
+namespace EasyCash.Query.Transactions.Get;
 
 public sealed class GetDailyTransactionsQuery : PagedQueryRequestBase<GetDailyTransactionsQueryResult>
 {

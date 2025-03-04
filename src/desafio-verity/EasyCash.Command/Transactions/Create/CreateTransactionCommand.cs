@@ -3,7 +3,7 @@ using EasyCash.Domain.CashFlow.Entities;
 using EasyCash.Domain.CashFlow.Enums;
 using EasyCash.Domain.CashFlow.Events;
 
-namespace EasyCash.Command.CashFlow.Create;
+namespace EasyCash.Command.Transactions.Create;
 
 public sealed class CreateTransactionCommand : IdempotencyCommandBase<CreateTransactionCommandResult>
 {

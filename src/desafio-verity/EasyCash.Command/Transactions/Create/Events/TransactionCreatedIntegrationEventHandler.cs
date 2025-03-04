@@ -3,7 +3,7 @@ using EasyCash.Domain.CashFlow.Events;
 using EasyCash.Domain.CashFlow.Interfaces;
 using MediatR;
 
-namespace EasyCash.Command.CashFlow.Create.Events;
+namespace EasyCash.Command.Transactions.Create.Events;
 
 internal sealed class TransactionCreatedIntegrationEventHandler : INotificationHandler<TransactionCreatedIntegrationEvent>
 {

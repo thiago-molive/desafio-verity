@@ -1,6 +1,6 @@
-﻿using EasyCash.Query.CashFlow.Get;
+﻿using EasyCash.Query.Transactions.Get;
 
-namespace EasyCash.Query.CashFlow.Interfaces;
+namespace EasyCash.Query.Transactions.Interfaces;
 
 public interface ITransactionQueryStore
 {

@@ -2,7 +2,7 @@
 using EasyCash.Domain.CashFlow.Entities;
 using EasyCash.Domain.CashFlow.Interfaces;
 
-namespace EasyCash.Command.Store.Repositories.CashFlow.Transactions;
+namespace EasyCash.Command.Store.Repositories.Transactions;
 
 internal sealed class TransactionsCommandStore : Repository<TransactionEntity, Guid>, ITransactionsCommandStore
 {

@@ -1,7 +1,7 @@
 ﻿using EasyCash.Domain.Abstractions.Messaging.Queries;
-using EasyCash.Query.CashFlow.Interfaces;
+using EasyCash.Query.Transactions.Interfaces;
 
-namespace EasyCash.Query.CashFlow.Get;
+namespace EasyCash.Query.Transactions.Get;
 
 internal sealed class GetDailyTransactionsQueryHandler : IQueryHandler<GetDailyTransactionsQuery, GetDailyTransactionsQueryResult>
 {

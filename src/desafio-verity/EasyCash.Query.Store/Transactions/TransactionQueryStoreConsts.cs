@@ -1,6 +1,6 @@
-﻿using EasyCash.Query.Store.CashFlow.Dto;
+﻿using EasyCash.Query.Store.Transactions.Dto;
 
-namespace EasyCash.Query.Store.CashFlow;
+namespace EasyCash.Query.Store.Transactions;
 
 internal static class TransactionQueryStoreConsts
 {

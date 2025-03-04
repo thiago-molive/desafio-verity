@@ -1,15 +1,15 @@
 using Asp.Versioning;
 using EasyCash.Api.Middleware;
 using EasyCash.Authorization.Provider.Authorization;
-using EasyCash.Command.CashFlow.Create;
+using EasyCash.Command.Transactions.Create;
 using EasyCash.Domain.Abstractions.Authorization;
-using EasyCash.Query.CashFlow.Get;
+using EasyCash.Query.Transactions.Get;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Net;
 
-namespace EasyCash.Api.Controllers.CashFlow;
+namespace EasyCash.Api.Controllers.Transactions;
 
 [ApiController]
 [ApiVersion(ApiVersions.V1)]
@@ -17,12 +17,12 @@ namespace EasyCash.Api.Controllers.CashFlow;
 [Description("Cash flow controller")]
 [ApiExplorerSettings(GroupName = "CashFlow")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class CashFlowsController : ControllerBase
+public class TransactionsController : ControllerBase
 {
 
     private readonly ISender _sender;
 
-    public CashFlowsController(ISender sender)
+    public TransactionsController(ISender sender)
     {
         _sender = sender;
     }

@@ -1,6 +1,40 @@
-@EasyCash.Api_HostAddress = http://localhost:5161
+@BaseUrl = https://localhost:7152
 
-GET {{EasyCash.Api_HostAddress}}/weatherforecast/
+### Criar Usuário
+POST {{BaseUrl}}/api/v1/users/register
 Accept: application/json
+Content-Type: application/json
 
-###
+{
+  "email": "new@user.com",
+  "firstName": "new",
+  "lastName": "user",
+  "password": "123456"
+}
+
+### Login
+POST {{BaseUrl}}/api/v1/users/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "new@user.com",
+  "password": "123456"
+}
+
+### Transação
+@AccessToken = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4bTkxTDVlYnd3RW1Rdzk4WThfUTVrQVg1R0pGZjFXRjdpY1kxZDIyOUlZIn0.eyJleHAiOjE3NDExMzYyMTIsImlhdCI6MTc0MTEzMjYxMiwianRpIjoiNDY4NDE2OTAtYWE4Yi00ZTE2LTkxMjItY2EwOTRkOTliMDJkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9yZWFsbXMvZWFzeWNhc2giLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZWM1NTcwMzgtMGVjNi00ZDQ2LWI2OTYtOTg3YjI5M2Q3MzU3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZWFzeWNhc2gtYXV0aC1jbGllbnQiLCJzaWQiOiI1M2MxZjZjNC1lMWVjLTQwYWEtOTg1YS0zNWIxMmEzYmM2ZWYiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtZWFzeWNhc2giXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJuZXcgdXNlciIsInByZWZlcnJlZF91c2VybmFtZSI6Im5ld0B1c2VyLmNvbSIsImdpdmVuX25hbWUiOiJuZXciLCJmYW1pbHlfbmFtZSI6InVzZXIiLCJlbWFpbCI6Im5ld0B1c2VyLmNvbSJ9.kPsk2EGqP3AmAQJ2JHFE5u3Ulnjf2QcSIyAHYq9JPh3-L4VP9Mm2a8ALojMI2rLkbkC-_yNH2i2oIsSb3jCZta6mKWB7XafnhTo5lf74WiHyV1xk-TzWy9iItpbnuBH3mdCU9B2h-OFxP6Tthm2S6UI0LWsTn_3CEmT4lHqFxX7FH4H-MfGuUICF2cYHoGObf5V3PMBLyaLMxxZGmp_SWQUBOkan2JJ8b42bMLA8LH1e7H0_yFodR8OYfCSm9YJbT8gZquV3I458C7LQiI8OwOy0WySwSXDe4WlxaKqyei9UPp084Lci_fUjxwOIq_yHYUfmqeU6qg4XcXPVnHLvaw
+
+POST {{BaseUrl}}/api/v1/Transactions
+Accept: application/json
+Authorization: Bearer {{AccessToken}}
+Content-Type: application/json
+
+{
+  "idempotencyKey": "2b161a75-2717-40a4-a7c6-fed2b1b255d0",
+  "description": "Description",
+  "type": 1,
+  "amount": 100,
+  "category": "categoria",
+  "date": "2025-03-04T23:47:59.508Z"
+}

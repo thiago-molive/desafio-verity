@@ -1,7 +1,7 @@
 ﻿using EasyCash.Domain.CashFlow.Enums;
-using EasyCash.Query.CashFlow.Get;
+using EasyCash.Query.Transactions.Get;
 
-namespace EasyCash.Query.Store.CashFlow.Dto;
+namespace EasyCash.Query.Store.Transactions.Dto;
 
 internal sealed class TransactionDto
 {

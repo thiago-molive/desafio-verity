@@ -1,7 +1,7 @@
 ﻿using EasyCash.Dapper.Provider;
-using EasyCash.Query.CashFlow.Interfaces;
-using EasyCash.Query.Store.CashFlow;
+using EasyCash.Query.Store.Transactions;
 using EasyCash.Query.Store.Users;
+using EasyCash.Query.Transactions.Interfaces;
 using EasyCash.Query.Users.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,12 +1,12 @@
 ﻿using Dapper;
 using EasyCash.Domain.Abstractions.Interfaces;
 using EasyCash.Domain.Abstractions.Messaging.Queries.PagedQueries;
-using EasyCash.Query.CashFlow.Get;
-using EasyCash.Query.CashFlow.Interfaces;
-using EasyCash.Query.Store.CashFlow.Dto;
+using EasyCash.Query.Store.Transactions.Dto;
+using EasyCash.Query.Transactions.Get;
+using EasyCash.Query.Transactions.Interfaces;
 using System.Data;
 
-namespace EasyCash.Query.Store.CashFlow;
+namespace EasyCash.Query.Store.Transactions;
 
 internal sealed class TransactionQueryStore : ITransactionQueryStore
 {

@@ -1,4 +1,4 @@
-﻿using EasyCash.Command.CashFlow.Create.Events;
+﻿using EasyCash.Command.Transactions.Create.Events;
 using EasyCash.Domain.Abstractions.Interfaces;
 using EasyCash.Domain.Abstractions.Messaging.Commands;
 using EasyCash.Domain.CashFlow.Entities;
@@ -6,7 +6,7 @@ using EasyCash.Domain.CashFlow.Events;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 
-namespace EasyCash.Command.CashFlow.Create;
+namespace EasyCash.Command.Transactions.Create;
 
 internal sealed class CreateTransactionCommandHandler : ICommandHandler<CreateTransactionCommand, CreateTransactionCommandResult>
 {
