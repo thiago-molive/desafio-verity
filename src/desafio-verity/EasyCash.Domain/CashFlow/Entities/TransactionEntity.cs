@@ -23,7 +23,6 @@ public sealed class TransactionEntity : EntityBase<Guid>
 
     public long RowVersion { get; set; } = 1;
 
-    // Para EF Core
     private TransactionEntity() { }
 
     public static TransactionEntity Create(

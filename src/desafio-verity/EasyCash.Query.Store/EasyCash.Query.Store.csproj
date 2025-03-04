@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EasyCash.Dapper.Provider\EasyCash.Dapper.Provider.csproj" />
+    <ProjectReference Include="..\EasyCash.Query\EasyCash.Query.csproj" />
   </ItemGroup>
 
 </Project>

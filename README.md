@@ -1,3 +1,8 @@
+# como rodar localmente
+- tenha certeza de que possui o docker instalado, caso não possua pode seguir um tutorial: [instação docker](https://github.com/codeedu/wsl2-docker-quickstart)
+- na pasta raiz do projeto tem um docker-compose, então abra no terminal ou powershell e rode o commando ``` docker-compose up -d --build ```
+- O projeto irá estar rodando em http
+
 ## Desafio proposto:
 
 - Um comerciante precisa controlar o seu fluxo de caixa diário com os lançamentos
@@ -39,6 +44,22 @@ consolidado diário cair.
 - Mesmo sendo uma aplicação simples, pensei em utilizar CQRS para separar o comandos de consultas e assim poder utilizar ef core para comandos e dapper para consultas, acho mais simples de fazer dessa forma, apesar de inicialmente não parecer, a medida que as aplicações crescem se torna claro o motivo disso ser uma boa escolha evitando complexidade desnecessária e possibilitando usar bancos de dados de leitura no futuro caso seja necessário.
 - Para comunicação entre infraestrutura e aplicação irei utilizar o pattern mediator centralizando a comunicação e promovendo baixo acoplamento entre as camadas.
 - A arquitetura definida também é bem fácil de se realizar manutenção quando se entende os conceitos.
+
+
+# Escalabilidade
+
+- Com essa arquitetura a aplicação pode escalar horizontalmente usando AGS (auto scaling group) ou HPA (horizontal pod autoscaling) para atender à demanda.
+- Projetei para que cada transacação enviada ao sistema vá inicialmente para uma fila para posterior processamento em background, garantindo assim uma maior quantidade de requisições, sem necessidade de aguardar o processamento emediato de operações mais longas como acesso a banco de dados e caso a aplicação tenha um alto volume de requisições.
+
+## Falando um pouco de resiliencia
+- a aplicação usa mensageria com redis stream, então caso caia por algum motivo, pode retormar a partir de onde parou. O redis stream armazena o ultimo offset lido no consumer group;
+- possui health check com verificação de bd, redis e identity provider que verifica como está a saude da aplicação, com isso o orquestrador consegue verificar se a aplicação está saudável e caso não steja faça a reinicialização do container/pod;
+- possui escoamento de metricas, log e traces pelo open telemetry, da pra plugar qualquer tipo de vendor para análise, optei por usar o aspire pela facilidade
+
+## Segurança
+
+- possui autenticação e autorização com identity provider, garantindo que apenas quem tem acesso e autorização possa realizar operações.
+- para ataques conhecidos e listados no OWASP optei por deixar a parte de segurança a cargo de um api gateway na borda da infraestrutura, api's gateways já são projetados e atualizos para mitigar problemas conhecidos e diante de tantas funcionalidades que um api gateway entrega não faz sentido reinventar a roda.
 
 # Definindo o tipo de banco de dados:
 
@@ -257,6 +278,137 @@ sequenceDiagram
     CronJob->>Outbox: Marca evento como processado
 
 ```
+
+
+# Transaction flow
+
+**Request** ``` POST /api/v1/CashFlows ```
+
+```json
+{
+  "idempotencyKey": "86a9cf3e-e887-4831-8d61-93b1e5275926",
+  "description": "description",
+  "type": 1,
+  "amount": 0,
+  "category": "categoria",
+  "date": "2025-03-04T17:36:58.839Z"
+}
+```
+
+| Parâmetro | Tipo | Descrição |
+|-----------------|------------|--------------------------------------------------------------------------------------|
+| IdempotencyKey  | string     | Chave de idempotencia gerado pelo client para identificar a transação como única.    |
+| Description     | string     | Descrição informada da transação.                                                    |
+| Type            | enum       | Enumerado em inteiro que identifica se a transação é ``` 1 = Credit, 2 - Debit ```.  |
+| Amount          | decimal    | Valor informado da transação.                                                        |
+| Category        | string     | Categoria da transação.                                                              |
+| Date            | DateTime   | Data da transação.                                                                   |
+
+**Response** 
+- Sucesso: responde com status code 200
+- Erro de servidor: Reponse com 
+```json
+{
+  "type": "ServerError",
+  "title": "Server error",
+  "status": 500,
+  "detail": "An unexpected error has occurred",
+  "requestId": "0HNAR8CKBG46L:00000007",
+  "traceId": "ffeaf8ee657e0e25fa02b7611c499586"
+}
+```
+- Erro de validação:
+```json
+{
+  "type": "ValidationFailure",
+  "title": "Validation error",
+  "status": 400,
+  "detail": "One or more validation errors occurred",
+  "errors": [
+    {
+      "propertyName": "Description",
+      "errorMessage": "'Description' must not be empty."
+    },
+    {
+      "propertyName": "Amount",
+      "errorMessage": "'Amount' must be greater than '0'."
+    },
+    {
+      "propertyName": "Category",
+      "errorMessage": "'Category' must not be empty."
+    },
+    {
+      "propertyName": "Date",
+      "errorMessage": "'Date' must not be empty."
+    }
+  ],
+  "requestId": "0HNAR8CKBG46L:0000000F",
+  "traceId": "aeb398268ee6c3316d098f6602ea9481"
+}
+```
+
+## Diagrama de sequencia
+
+```mermaid
+sequenceDiagram
+    participant Cliente as Cliente (API)
+    participant Mediator as Mediator (MediatR|Behaviors)
+    participant Handler as Command Handler
+    participant Fila as Message Queue
+    participant BackgroundService as Background Service
+    participant Banco as Banco de Dados
+    
+    Cliente->>Mediator: Envia requisição (Command)
+    Mediator->>Handler: Chama o Handler
+    Handler->>Fila: Valida e Publica evento na fila
+    Fila-->>BackgroundService: Mensagem disponível
+    BackgroundService->>Banco: Insere transação na tabela
+    Banco-->>BackgroundService: Confirmação de inserção
+    BackgroundService-->>Fila: Marca mensagem como processada
+```
+
+# Obter transações de uma determinada data (não é a consolidação)
+
+**Request** ``` GET /api/v1/CashFlows ```
+- Recebe via query string os seguintes parametros: Date, Page, PageSize
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------------|-----------------------------------------------------------------------------------|
+| Date      | DateTime   | Data em formato iso 8901.                                                         |
+| Page      | short      | Página solicitada, campo opcional, caso não enviado assume a primeira página.     |
+| PageSize  | byte       | Tamanho da pagina, campo opcional, caso não enviado assume 15 itens por página.   |
+
+**Response** 
+```json
+{
+  "items": [
+    {
+      "id": "7af7e6fb-4a7e-424c-9fff-d8d87741c21e",
+      "description": "Description",
+      "type": 1,
+      "typeDescription": "Credit",
+      "amount": 1,
+      "category": "Categoria",
+      "date": "2025-03-03T23:14:37.206Z"
+    }
+  ],
+  "page": 1,
+  "pageSize": 15,
+  "total": 1
+}
+```
+
+| Parâmetro | Tipo | Descrição |
+|-----------------|------------|--------------------------------------------------------------------------------------|
+| Id              | Guid       | Identificador único gerado da transação.                                             |
+| Description     | string     | Descrição informada no request.                                                      |
+| Type            | enum       | Enumerado em inteiro que identifica se a transação é ``` 1 = Credit, 2 - Debit ```.  |
+| TypeDescription | string     | Type em string                                                                       |
+| Amount          | decimal    | Valor informado da transação.                                                        |
+| Category        | string     | Categoria informada da transação na requisição.                                      |
+| Date            | DateTime   | Data da transação.                                                                   |
+
+
 
 ## Considerações adicionais:
 

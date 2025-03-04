@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Net;
+using EasyCash.Query.CashFlow.Get;
 
 namespace EasyCash.Api.Controllers;
 
@@ -32,6 +33,18 @@ public class CashFlowsController : ControllerBase
     public async Task<IActionResult> AddCategory([FromBody] CreateTransactionCommand command, CancellationToken cancellationToken)
     {
         var result = await _sender.Send(command, cancellationToken);
+
+        return Ok(result);
+    }
+
+    [HttpGet]
+    // [HasPermission(PermissionsConsts.Admin)]
+    [ProducesResponseType(typeof(GetDailyTransactionsQueryResult), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.InternalServerError)]
+    public async Task<IActionResult> GetDailyTransactions([FromQuery] GetDailyTransactionsQuery query, CancellationToken cancellationToken)
+    {
+        var result = await _sender.Send(query, cancellationToken);
 
         return Ok(result);
     }
