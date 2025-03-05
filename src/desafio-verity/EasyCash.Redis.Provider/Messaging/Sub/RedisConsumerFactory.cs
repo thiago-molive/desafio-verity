@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions;
+﻿using EasyCash.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

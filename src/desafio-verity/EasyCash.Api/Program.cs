@@ -1,4 +1,5 @@
 using Asp.Versioning.ApiExplorer;
+using EasyCash.Abstractions;
 using EasyCash.Api.ConsumerInitializer;
 using EasyCash.Api.Extensions;
 using EasyCash.Api.OpenApi;
@@ -6,7 +7,6 @@ using EasyCash.Api.Policyes;
 using EasyCash.Background.Jobs;
 using EasyCash.Command;
 using EasyCash.Command.Store;
-using EasyCash.Domain.Abstractions;
 using EasyCash.HealthCheck.Provider;
 using EasyCash.Keycloak.Identity.Provider;
 using EasyCash.Query;
@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
-EasyCash.OpenTelemetry.DependencyInjection.AddOpenTelemetryProvider(builder);
+EasyCash.OpenTelemetry.DependencyInjection.AddOpenTelemetryProvider(builder, "EasyCash.Api");
 
 // Add services to the container.
 builder.Services.AddApplicationCommand();

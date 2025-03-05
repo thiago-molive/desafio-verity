@@ -19,6 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\EasyCash.Abstractions\EasyCash.Abstractions.csproj" />
 		<ProjectReference Include="..\EasyCash.Domain\EasyCash.Domain.csproj" />
 	</ItemGroup>
 

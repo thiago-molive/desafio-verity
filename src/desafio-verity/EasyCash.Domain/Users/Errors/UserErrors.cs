@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions.Exceptions;
+﻿using EasyCash.Abstractions.Exceptions;
 
 namespace EasyCash.Domain.Users.Errors;
 

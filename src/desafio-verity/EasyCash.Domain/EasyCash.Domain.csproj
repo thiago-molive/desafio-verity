@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Messaging\Events\" />
+    <ProjectReference Include="..\EasyCash.Abstractions\EasyCash.Abstractions.csproj" />
+    <ProjectReference Include="..\EasyCash.Shared\EasyCash.Shared.csproj" />
   </ItemGroup>
 
 </Project>

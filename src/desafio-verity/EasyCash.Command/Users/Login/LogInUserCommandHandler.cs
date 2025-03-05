@@ -1,5 +1,5 @@
-﻿using EasyCash.Domain.Abstractions.Authentication;
-using EasyCash.Domain.Abstractions.Messaging.Commands;
+﻿using EasyCash.Abstractions.Authentication;
+using EasyCash.Abstractions.Messaging.Commands;
 
 namespace EasyCash.Command.Users.Login;
 

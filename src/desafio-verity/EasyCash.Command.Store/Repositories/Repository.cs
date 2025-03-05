@@ -1,5 +1,5 @@
-﻿using EasyCash.Command.Store.Contexts;
-using EasyCash.Domain.Abstractions;
+﻿using EasyCash.Abstractions;
+using EasyCash.Command.Store.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasyCash.Command.Store.Repositories;

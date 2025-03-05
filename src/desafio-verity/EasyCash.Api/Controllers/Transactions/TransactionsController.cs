@@ -1,7 +1,7 @@
 using Asp.Versioning;
+using EasyCash.Abstractions.Authorization;
 using EasyCash.Api.Middleware;
 using EasyCash.Command.Transactions.Create;
-using EasyCash.Domain.Abstractions.Authorization;
 using EasyCash.Query.Transactions.Get;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

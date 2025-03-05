@@ -1,5 +1,5 @@
-﻿using EasyCash.Domain.Abstractions;
-using EasyCash.Domain.Abstractions.Interfaces;
+﻿using EasyCash.Abstractions;
+using EasyCash.Abstractions.Interfaces;
 using StackExchange.Redis;
 using System.Text.Json;
 

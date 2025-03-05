@@ -1,6 +1,6 @@
-﻿using EasyCash.Domain.Abstractions;
+﻿using EasyCash.Abstractions;
 using EasyCash.Domain.Transactions.Entities;
-using EasyCash.Domain.Transactions.Enums;
+using EasyCash.Shared.Enums;
 
 namespace EasyCash.Domain.Transactions.Events;
 

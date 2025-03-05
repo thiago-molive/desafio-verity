@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions.Interfaces;
+﻿using EasyCash.Abstractions.Interfaces;
 using EasyCash.Redis.Provider.Caching;
 using EasyCash.Redis.Provider.Messaging.Pub;
 using EasyCash.Redis.Provider.Messaging.Sub;

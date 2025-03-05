@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions.Messaging.Commands;
+﻿using EasyCash.Abstractions.Messaging.Commands;
 
 namespace EasyCash.Command.Users.Login;
 

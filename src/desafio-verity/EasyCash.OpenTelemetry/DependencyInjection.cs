@@ -11,9 +11,9 @@ namespace EasyCash.OpenTelemetry;
 
 public static class DependencyInjection
 {
-    public static IHostApplicationBuilder AddOpenTelemetryProvider(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddOpenTelemetryProvider(this IHostApplicationBuilder builder, string serviceName)
     {
-        var resourceBuilder = ResourceBuilder.CreateDefault().AddService("EasyCash");
+        var resourceBuilder = ResourceBuilder.CreateDefault().AddService(serviceName);
 
         builder.Logging.AddOpenTelemetry(x =>
         {

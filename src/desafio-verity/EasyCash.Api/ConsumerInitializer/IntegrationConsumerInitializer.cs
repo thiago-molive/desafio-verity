@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions;
+﻿using EasyCash.Abstractions;
 using EasyCash.Domain.Transactions.Events;
 
 namespace EasyCash.Api.ConsumerInitializer;

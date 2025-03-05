@@ -1,6 +1,6 @@
-﻿using EasyCash.Command.Users.Login;
-using EasyCash.Domain.Abstractions.Authentication;
-using EasyCash.Domain.Abstractions.Exceptions;
+﻿using EasyCash.Abstractions.Authentication;
+using EasyCash.Abstractions.Exceptions;
+using EasyCash.Command.Users.Login;
 using EasyCash.Domain.Users.Errors;
 using FluentAssertions;
 using Moq;

@@ -1,7 +1,7 @@
-﻿using EasyCash.Command.Store.Contexts;
+﻿using EasyCash.Abstractions;
+using EasyCash.Abstractions.Interfaces;
+using EasyCash.Command.Store.Contexts;
 using EasyCash.Command.Store.Repositories;
-using EasyCash.Domain.Abstractions;
-using EasyCash.Domain.Abstractions.Interfaces;
 using Newtonsoft.Json;
 
 namespace EasyCash.Command.Store.SaveChangesBehaviors;

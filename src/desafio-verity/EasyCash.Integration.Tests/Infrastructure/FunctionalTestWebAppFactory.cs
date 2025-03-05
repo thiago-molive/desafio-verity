@@ -1,7 +1,6 @@
 ﻿using EasyCash.Api;
 using EasyCash.Command.Store.Contexts;
 using EasyCash.Dapper.Provider;
-using EasyCash.Domain.Abstractions.Interfaces;
 using EasyCash.Integration.Tests.Users;
 using EasyCash.Keycloak.Identity.Provider.Authentication;
 using Microsoft.AspNetCore.Hosting;
@@ -11,8 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System.Net.Http.Json;
 using StackExchange.Redis;
+using System.Net.Http.Json;
+using EasyCash.Abstractions.Interfaces;
 using Testcontainers.Keycloak;
 using Testcontainers.PostgreSql;
 using Testcontainers.Redis;

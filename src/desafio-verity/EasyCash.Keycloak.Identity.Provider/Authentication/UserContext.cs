@@ -1,5 +1,5 @@
-﻿using EasyCash.Domain.Abstractions.Authentication;
-using EasyCash.Domain.Abstractions.Exceptions;
+﻿using EasyCash.Abstractions.Authentication;
+using EasyCash.Abstractions.Exceptions;
 using Microsoft.AspNetCore.Http;
 
 namespace EasyCash.Keycloak.Identity.Provider.Authentication;

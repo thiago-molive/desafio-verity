@@ -1,7 +1,7 @@
-﻿using EasyCash.Domain.Abstractions;
-using EasyCash.Domain.Abstractions.Exceptions;
-using EasyCash.Domain.Transactions.Enums;
-using EasyCash.Domain.Transactions.ValueObjects;
+﻿using EasyCash.Abstractions;
+using EasyCash.Abstractions.Exceptions;
+using EasyCash.Shared.Enums;
+using EasyCash.Shared.ValueObjects;
 
 namespace EasyCash.Domain.Transactions.Entities;
 

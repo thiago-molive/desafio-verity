@@ -1,5 +1,5 @@
-﻿using EasyCash.Domain.Transactions.Enums;
-using EasyCash.Query.Transactions.Get;
+﻿using EasyCash.Query.Transactions.Get;
+using EasyCash.Shared.Enums;
 
 namespace EasyCash.Query.Store.Transactions.Dto;
 

@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using EasyCash.Domain.Abstractions.Interfaces;
-using EasyCash.Domain.Abstractions.Messaging.Queries.PagedQueries;
+using EasyCash.Abstractions.Interfaces;
+using EasyCash.Abstractions.Messaging.Queries.PagedQueries;
 using EasyCash.Query.Store.Transactions.Dto;
 using EasyCash.Query.Transactions.Get;
 using EasyCash.Query.Transactions.Interfaces;

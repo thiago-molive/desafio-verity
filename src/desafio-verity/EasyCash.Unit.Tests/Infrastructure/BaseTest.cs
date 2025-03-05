@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using EasyCash.Domain.Abstractions;
+using EasyCash.Abstractions;
 
 namespace EasyCash.Unit.Tests.Infrastructure;
 

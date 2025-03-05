@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions.Messaging.Queries;
+﻿using EasyCash.Abstractions.Messaging.Queries;
 
 namespace EasyCash.Query.Users;
 

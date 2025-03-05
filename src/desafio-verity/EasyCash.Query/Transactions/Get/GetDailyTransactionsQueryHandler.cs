@@ -1,5 +1,6 @@
-﻿using EasyCash.Domain.Abstractions.Messaging.Queries;
+﻿using EasyCash.Abstractions.Messaging.Queries;
 using EasyCash.Query.Transactions.Interfaces;
+using FluentValidation;
 
 namespace EasyCash.Query.Transactions.Get;
 
@@ -18,3 +19,10 @@ internal sealed class GetDailyTransactionsQueryHandler : IQueryHandler<GetDailyT
     }
 }
 
+public sealed class GetDailyTransactionsQueryValidator : AbstractValidator<GetDailyTransactionsQuery>
+{
+    public GetDailyTransactionsQueryValidator()
+    {
+        RuleFor(x => x.Date).NotNull();
+    }
+}

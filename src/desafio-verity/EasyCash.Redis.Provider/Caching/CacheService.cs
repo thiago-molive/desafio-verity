@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions.Interfaces;
+﻿using EasyCash.Abstractions.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Buffers;
 using System.Text.Json;

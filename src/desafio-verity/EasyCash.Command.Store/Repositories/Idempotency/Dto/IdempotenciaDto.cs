@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions.Idempotency.Entity;
+﻿using EasyCash.Abstractions.Idempotency.Entity;
 
 namespace EasyCash.Command.Store.Repositories.Idempotency.Dto;
 

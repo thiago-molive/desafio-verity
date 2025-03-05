@@ -1,6 +1,6 @@
 ﻿using EasyCash.Command.Transactions.Create;
-using EasyCash.Domain.Transactions.Enums;
 using EasyCash.Integration.Tests.Infrastructure;
+using EasyCash.Shared.Enums;
 using FluentAssertions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net;

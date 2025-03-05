@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions.Authentication;
+﻿using EasyCash.Abstractions.Authentication;
 using EasyCash.Query.Users;
 using EasyCash.Query.Users.Interfaces;
 using FluentAssertions;

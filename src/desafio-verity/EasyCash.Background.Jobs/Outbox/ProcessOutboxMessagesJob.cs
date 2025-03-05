@@ -1,7 +1,7 @@
 ﻿using Dapper;
+using EasyCash.Abstractions.Interfaces;
+using EasyCash.Abstractions.Messaging.Events;
 using EasyCash.Background.Jobs.Outbox.Models;
-using EasyCash.Domain.Abstractions.Interfaces;
-using EasyCash.Domain.Abstractions.Messaging.Events;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

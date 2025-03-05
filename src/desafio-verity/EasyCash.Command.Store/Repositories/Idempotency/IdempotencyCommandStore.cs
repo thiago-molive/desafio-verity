@@ -1,6 +1,6 @@
-﻿using EasyCash.Command.Store.Contexts;
-using EasyCash.Domain.Abstractions.Idempotency.Entity;
-using EasyCash.Domain.Abstractions.Idempotency.Interfaces;
+﻿using EasyCash.Abstractions.Idempotency.Entity;
+using EasyCash.Abstractions.Idempotency.Interfaces;
+using EasyCash.Command.Store.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasyCash.Command.Store.Repositories.Idempotency;

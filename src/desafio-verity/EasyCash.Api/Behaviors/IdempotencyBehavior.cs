@@ -1,6 +1,6 @@
-﻿using EasyCash.Domain.Abstractions.Idempotency.Entity;
-using EasyCash.Domain.Abstractions.Idempotency.Interfaces;
-using EasyCash.Domain.Abstractions.Messaging.Commands;
+﻿using EasyCash.Abstractions.Idempotency.Entity;
+using EasyCash.Abstractions.Idempotency.Interfaces;
+using EasyCash.Abstractions.Messaging.Commands;
 using MediatR;
 using Newtonsoft.Json;
 

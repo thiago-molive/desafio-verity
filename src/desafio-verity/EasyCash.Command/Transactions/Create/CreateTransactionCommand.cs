@@ -1,6 +1,6 @@
-﻿using EasyCash.Domain.Abstractions.Messaging.Commands;
+﻿using EasyCash.Abstractions.Messaging.Commands;
 using EasyCash.Domain.Transactions.Entities;
-using EasyCash.Domain.Transactions.Enums;
+using EasyCash.Shared.Enums;
 
 namespace EasyCash.Command.Transactions.Create;
 

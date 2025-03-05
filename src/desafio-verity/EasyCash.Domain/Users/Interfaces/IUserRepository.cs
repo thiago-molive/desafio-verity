@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions.Repository;
+﻿using EasyCash.Abstractions.Repository;
 using EasyCash.Domain.Users.Entities;
 
 namespace EasyCash.Domain.Users.Interfaces;

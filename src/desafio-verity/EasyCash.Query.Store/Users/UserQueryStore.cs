@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using EasyCash.Domain.Abstractions.Interfaces;
+using EasyCash.Abstractions.Interfaces;
 using EasyCash.Query.Users;
 using EasyCash.Query.Users.Interfaces;
 using System.Data;

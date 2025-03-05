@@ -1,6 +1,6 @@
-﻿using EasyCash.Command.Users.Register;
-using EasyCash.Domain.Abstractions.Authentication;
-using EasyCash.Domain.Abstractions.Exceptions;
+﻿using EasyCash.Abstractions.Authentication;
+using EasyCash.Abstractions.Exceptions;
+using EasyCash.Command.Users.Register;
 using EasyCash.Domain.Users.Entities;
 using EasyCash.Domain.Users.Interfaces;
 using FluentAssertions;

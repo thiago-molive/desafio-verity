@@ -1,9 +1,9 @@
-﻿using EasyCash.Command.Store.Contexts;
+﻿using EasyCash.Abstractions.Idempotency.Interfaces;
+using EasyCash.Abstractions.Interfaces;
+using EasyCash.Command.Store.Contexts;
 using EasyCash.Command.Store.Repositories.Idempotency;
 using EasyCash.Command.Store.Repositories.Transactions;
 using EasyCash.Command.Store.Repositories.Users;
-using EasyCash.Domain.Abstractions.Idempotency.Interfaces;
-using EasyCash.Domain.Abstractions.Interfaces;
 using EasyCash.Domain.Transactions.Interfaces;
 using EasyCash.Domain.Users.Interfaces;
 using EntityFramework.Exceptions.PostgreSQL;

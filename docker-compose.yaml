@@ -22,13 +22,18 @@ services:
     image: postgres:latest
     container_name: easycash.Db
     environment:
-      - POSTGRES_DB=easycash
+     #- POSTGRES_DB=easycash
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     # volumes:
     #   - ./.containers/database:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    command: >
+      bash -c "docker-entrypoint.sh postgres & sleep 5 && 
+      psql -U postgres -c 'CREATE DATABASE easycash;' &&
+      psql -U postgres -c 'CREATE DATABASE easycash_report;' &&
+      wait"
 
   easycash-idp:
     image: quay.io/keycloak/keycloak:latest

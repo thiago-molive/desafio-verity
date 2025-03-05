@@ -1,5 +1,5 @@
-﻿using EasyCash.Command.Store.Constants;
-using EasyCash.Domain.Abstractions.Idempotency.Entity;
+﻿using EasyCash.Abstractions.Idempotency.Entity;
+using EasyCash.Command.Store.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

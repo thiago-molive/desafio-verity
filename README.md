@@ -4,7 +4,7 @@
 - Aguarde um pouco até os serviços iniciarem, pode demorar um pouco na primeira vez.
 - O projeto irá estar rodando em ``` https://localhost:7152/swagger ```
 
-- Deixei um seed para criar um usuario, pode logar com o user: test@easycash.com.br e senha: 123456 ou pode criar um user direto no swagger (em select a definition trocar para users).
+- Deixei um ``` EasyCash.Api.http ``` na raiz da api para criar usuario e criar uma transação, pode logar com o user: test@easycash.com.br e senha: 123456 ou pode criar um user direto no swagger (em select a definition trocar para users).
 
 ## Desafio proposto:
 
@@ -40,8 +40,7 @@ consolidado diário cair.
     - Considerei brevemente deixar ambas na mesma aplicação e separar apenas o banco da dados para atender aos requisitos, mas descartei imediatamente visto que o serviço de relatórios não precisa escalar na mesma proporção da aplicação de fluxo de caixa, apesar de isso não ser um problema grande eu posso gerenciar melhor recursos valiosos de maquina.
     - Consistência eventual não será um problema pra esse tipo de aplicação, visto que a consolidação é diária.
 - Para arquitetura eu decidi usar clean architecture (mesmo sendo uma aplicação simples), assim tenho cada camada e responsabilidade bem definida e fica mais fácil saber onde está cada coisa pela sua responsabilidade.
-- Para autenticação quero utilizar um servidor de identidade como fonte da verdade para a parte de autenticação
-- Para autorização implementei direto na aplicação para ter mais controle sobre o fluxo de autorização e não expoe as permissoes via bearer token
+- Para autenticação e autorização quero utilizar um servidor de identidade como fonte da verdade para a parte de autenticação
 - Para o dominio irei usar DDD (Domain Driven Design), também para fins de organização, legibilidade e melhor manutenção, baixo acoplamento, encapsulamento, testes entre outros benefícios.
 - Junto com o DDD irei utilizar (EDA) (Event driven arquitecture) para disparar eventos, possibilitando integração entre dominios de forma desacoplada e fluxos de dados menos complexos.
 - Para os eventos emitidos irei utilizar o pattern transaction outbox, persistindo as mensagens no banco de dados e processando-as fora da requisição original.
@@ -62,8 +61,7 @@ consolidado diário cair.
 
 ## Segurança
 
-- possui autenticação com identity provider que serve como fonte da verdade para dizer quem é o user que está altenticando e podendo gerenciar pelo keycloak.
-- possui autorização na aplicação
+- possui autenticação e autorização com identity provider que serve como fonte da verdade para dizer quem é o user que está autenticando o em que está autorizado acessar, e podendo gerenciar pelo keycloak.
 - para ataques conhecidos e listados no OWASP optei por deixar a parte de segurança a cargo de um api gateway na borda da infraestrutura, api's gateways já são projetados e atualizos para mitigar problemas conhecidos e diante de tantas funcionalidades que um api gateway entrega não faz sentido reinventar a roda.
 
 # Definindo o tipo de banco de dados:
@@ -89,26 +87,38 @@ consolidado diário cair.
 # EasyCash Solution
 
 ```
+Abstractions/
+├── EasyCash.Abstractions/
 Application/
-├── EasyCash.Command/
-└── EasyCash.Query/
+└──  Report
+│   ├──  EasyCash.Report.Command/
+│   ├──  EasyCash.Report.Query/
+└── Transactions
+│   ├── EasyCash.Command/
+│   ├── EasyCash.Query/
 Infraestructure/
-├── Database/
-│   ├── EasyCash.Command.Store/
-│   └── EasyCash.Query.Store/
-├── Api/
+└──  Database/
+│   └──  Report
+│   ├────── EasyCash.Report.Command.Store/
+│   └────── EasyCash.Report.Query.Store/
+│   └── Transactions
+│   └────── EasyCash.Command.Store/
+│   └────── EasyCash.Query.Store/
+└──  Api/
 │   ├── EasyCash.Api/
-│   └── EasyCash.Report.Api/
-└── Integrations/
+│   |── EasyCash.Report.Api/
+└──  Integrations/
     ├── EasyCash.Background.Jobs/
     ├── EasyCash.Dapper.Provider/
     ├── EasyCash.HealthCheck.Provider/
     ├── EasyCash.OpenTelemetry/
     ├── EasyCash.Redis.Provider/
-    ├── EasyCash.Authentication.Provider/
-    └── EasyCash.Authorization.Provider/
+    ├── EasyCash.Keycloak.Identity.Provider/
 Domain/
-└── EasyCash.Domain/
+└── ├── Report
+│   ├────── EasyCash.Report.Domain/
+│   ├── Transactions
+│   ├────── EasyCash.Domain/
 Tests/
 ├── EasyCash.ArchitectureTests/
 ├── EasyCash.Unit.Tests/
@@ -289,21 +299,22 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant User
-    participant IdentityProvider as Identity Provider
+    participant Keycloak as Keycloak (Identity Provider)
     participant Application as Application
-    participant CustomClaimsTransformation as CustomClaimsTransformation
-    participant PermissionAuthorizationHandler as PermissionAuthorizationHandler
 
-    User ->> IdentityProvider: 1. Authenticate
-    IdentityProvider -->> User: 2. Access token
+    User ->> Keycloak: 1. Request authentication (username/password)
+    Keycloak -->> User: 2. Return access token (JWT)
+    
     User ->> Application: 3. API call with access token
     activate Application
-    Application ->> CustomClaimsTransformation: 4. Claims transformation
-    CustomClaimsTransformation ->> Application: 5. Return
-    Application ->> PermissionAuthorizationHandler: 6. Authorize
-    PermissionAuthorizationHandler ->> Application: 7. Return
-    Application -->> User: 8. API response
+    Application ->> Keycloak: 4. Validate access token
+    Keycloak -->> Application: 5. Token validation response
+    
+    Application ->> Application: 6. Decode JWT and extract claims
+    Application ->> Application: 7. Check roles/permissions
+    Application -->> User: 8. Return API response
     deactivate Application
+
 ```
 
 
@@ -439,9 +450,10 @@ sequenceDiagram
 
 ## Considerações adicionais:
 
-- Quis manter meais simples, mas com mais tempo teria feito um cadastro de caixas e vincular o caixa à transação pra identificação, abertura e fechamento de caixas, job para fechar caixas automaticamente no encerramento do dia caso não tenham sido fechados manualmente.
+- Quis manter meais simples, mas com mais tempo teria feito um cadastro de estabelecimento e caixas e vincular o caixa à transação pra identificação, abertura e fechamento de caixas, job para fechar caixas automaticamente no encerramento do dia caso não tenham sido fechados manualmente.
 - Backup dos bancos de dados, definir frequencia e estratégias.
 - Penso em estratégias de retry para consumo de mensagens que eventualmente ocorrerem problemas aplicando conceito de dead letter queues e retry com backoff exponencial, não irei fazer isso nesse teste devido a complexidade.
 - Criar pipeline CI
 - Criar IaaS (infraestrutura como serviço) para implantação e mudanças de forma rápidas e consistentes.
 - Adicionar variaveis de ambientes e vault para senhas e secrets
+- Melhorar observabilidade passando o contexto pra mensageria

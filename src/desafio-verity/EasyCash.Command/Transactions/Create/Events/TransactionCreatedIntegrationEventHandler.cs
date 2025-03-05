@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Abstractions.Interfaces;
+﻿using EasyCash.Abstractions.Interfaces;
 using EasyCash.Domain.Transactions.Events;
 using EasyCash.Domain.Transactions.Interfaces;
 using MediatR;

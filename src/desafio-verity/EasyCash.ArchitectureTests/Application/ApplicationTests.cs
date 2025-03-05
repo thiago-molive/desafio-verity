@@ -1,6 +1,6 @@
-﻿using EasyCash.ArchitectureTests.Infrastructure;
-using EasyCash.Domain.Abstractions.Messaging.Commands;
-using EasyCash.Domain.Abstractions.Messaging.Queries;
+﻿using EasyCash.Abstractions.Messaging.Commands;
+using EasyCash.Abstractions.Messaging.Queries;
+using EasyCash.ArchitectureTests.Infrastructure;
 using FluentAssertions;
 using FluentValidation;
 using NetArchTest.Rules;

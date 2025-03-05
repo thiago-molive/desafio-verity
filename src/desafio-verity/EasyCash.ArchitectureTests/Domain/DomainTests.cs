@@ -1,6 +1,6 @@
-﻿using EasyCash.ArchitectureTests.Infrastructure;
-using EasyCash.Domain.Abstractions;
-using EasyCash.Domain.Abstractions.Messaging.Events;
+﻿using EasyCash.Abstractions;
+using EasyCash.Abstractions.Messaging.Events;
+using EasyCash.ArchitectureTests.Infrastructure;
 using FluentAssertions;
 using NetArchTest.Rules;
 using System.Reflection;

@@ -1,5 +1,5 @@
-﻿using EasyCash.Domain.Abstractions.Authentication;
-using EasyCash.Domain.Abstractions.Authorization;
+﻿using EasyCash.Abstractions.Authentication;
+using EasyCash.Abstractions.Authorization;
 using EasyCash.Domain.Users.Entities;
 using EasyCash.Keycloak.Identity.Provider.Authentication;
 using EasyCash.Keycloak.Identity.Provider.Login;

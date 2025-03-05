@@ -1,6 +1,6 @@
-﻿using EasyCash.Command.Transactions.Create.Events;
-using EasyCash.Domain.Abstractions.Interfaces;
-using EasyCash.Domain.Abstractions.Messaging.Commands;
+﻿using EasyCash.Abstractions.Interfaces;
+using EasyCash.Abstractions.Messaging.Commands;
+using EasyCash.Command.Transactions.Create.Events;
 using EasyCash.Domain.Transactions.Entities;
 using EasyCash.Domain.Transactions.Events;
 using FluentValidation;

@@ -1,7 +1,7 @@
-﻿using EasyCash.Domain.Abstractions.Exceptions;
+﻿using EasyCash.Abstractions.Exceptions;
 using FluentValidation;
 using MediatR;
-using ValidationException = EasyCash.Domain.Abstractions.Exceptions.ValidationException;
+using ValidationException = EasyCash.Abstractions.Exceptions.ValidationException;
 
 namespace EasyCash.Api.Behaviors;
 

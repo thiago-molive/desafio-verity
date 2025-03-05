@@ -1,4 +1,4 @@
-﻿using EasyCash.Domain.Transactions.ValueObjects;
+﻿using EasyCash.Shared.ValueObjects;
 using FluentAssertions;
 
 namespace EasyCash.Unit.Tests.Domain.ValueObjects;

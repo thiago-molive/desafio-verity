@@ -1,5 +1,5 @@
-﻿using EasyCash.Domain.Abstractions.Authentication;
-using EasyCash.Domain.Abstractions.Messaging.Queries;
+﻿using EasyCash.Abstractions.Authentication;
+using EasyCash.Abstractions.Messaging.Queries;
 using EasyCash.Query.Users.Interfaces;
 
 namespace EasyCash.Query.Users;
