@@ -16,6 +16,4 @@ public interface IUserContext
             ? throw new BusinessException(new Error("UserPreferences.InvalidId", "Invalid user id"))
             : id;
     }
-
-    bool IsUserAdmin();
 }

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Net;
-using EasyCash.Authorization.Provider.Authorization;
 
 namespace EasyCash.Api.Controllers.Users;
 
@@ -29,7 +28,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("me")]
-    [HasPermission(PermissionsConsts.Collaborator)]
+    [Authorize(policy: PoliciesConsts.CollaboratorUser)]
     [ProducesResponseType(typeof(UserQueryResult), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.InternalServerError)]

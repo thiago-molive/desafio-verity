@@ -20,16 +20,6 @@ public class UserEntityTests : BaseTest
     }
 
     [Fact]
-    public void Create_Should_AddRegisteredRoleToUser()
-    {
-        // Act
-        var user = UserEntity.Create(UserData.FirstName, UserData.LastName, UserData.Email);
-
-        // Assert
-        user.Roles.Should().Contain(RoleEntity.Collaborator);
-    }
-
-    [Fact]
     public void Create_ShouldInitializeUserEntity()
     {
         // Arrange
@@ -44,7 +34,6 @@ public class UserEntityTests : BaseTest
         user.FirstName.Should().Be(firstName);
         user.LastName.Should().Be(lastName);
         user.Email.Should().Be(email);
-        user.Roles.Should().ContainSingle(role => role == RoleEntity.Collaborator);
     }
 
     [Fact]
@@ -71,6 +60,5 @@ public class UserEntityTests : BaseTest
         user.FirstName.Should().Be(new FirstName("Test"));
         user.LastName.Should().Be(new LastName("User"));
         user.Email.Should().Be(Email.Instance("test@easycash.com.br"));
-        user.Roles.Should().ContainSingle(role => role == RoleEntity.Collaborator);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using EasyCash.Domain.Abstractions.Authentication;
+using EasyCash.Domain.Abstractions.Authorization;
 using EasyCash.Domain.Users.Entities;
 using EasyCash.Keycloak.Identity.Provider.Authentication;
 using EasyCash.Keycloak.Identity.Provider.Login;
 using EasyCash.Keycloak.Identity.Provider.Register;
+using Keycloak.AuthServices.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,17 @@ public static class DependencyInjection
         services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer();
+
+        services.AddAuthorization(options =>
+            {
+                options.AddPolicy(PoliciesConsts.CollaboratorUser, builder =>
+                {
+                    builder
+                        .RequireRealmRoles(PermissionsConsts.Collaborator); // Realm role is fetched from token
+                    // .RequireResourceRoles("Admin"); // Resource/Client role is fetched from token
+                });
+            })
+            .AddKeycloakAuthorization(configuration);
 
         services.Configure<AuthenticationOptions>(configuration.GetSection("Authentication"));
 
@@ -45,4 +58,9 @@ public static class DependencyInjection
 
         services.AddScoped<IUserContext, UserContext>();
     }
+}
+
+internal sealed class RealmAccess
+{
+    public List<string> Roles { get; set; }
 }

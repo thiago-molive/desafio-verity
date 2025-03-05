@@ -33,7 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EasyCash.Api\EasyCash.Api.csproj" />
-    <ProjectReference Include="..\EasyCash.Authorization.Provider\EasyCash.Authorization.Provider.csproj" />
     <ProjectReference Include="..\EasyCash.Command.Store\EasyCash.Command.Store.csproj" />
     <ProjectReference Include="..\EasyCash.Command\EasyCash.Command.csproj" />
     <ProjectReference Include="..\EasyCash.Dapper.Provider\EasyCash.Dapper.Provider.csproj" />

@@ -1,10 +1,10 @@
 using Asp.Versioning;
 using EasyCash.Api.Middleware;
-using EasyCash.Authorization.Provider.Authorization;
 using EasyCash.Command.Transactions.Create;
 using EasyCash.Domain.Abstractions.Authorization;
 using EasyCash.Query.Transactions.Get;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Net;
@@ -28,7 +28,7 @@ public class TransactionsController : ControllerBase
     }
 
     [HttpPost]
-    [HasPermission(PermissionsConsts.Collaborator)]
+    [Authorize(policy: PoliciesConsts.CollaboratorUser)]
     [ProducesResponseType(typeof(CreateTransactionCommandResult), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.InternalServerError)]
@@ -40,7 +40,7 @@ public class TransactionsController : ControllerBase
     }
 
     [HttpGet]
-    [HasPermission(PermissionsConsts.Collaborator)]
+    [Authorize(policy: PoliciesConsts.CollaboratorUser)]
     [ProducesResponseType(typeof(GetDailyTransactionsQueryResult), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.InternalServerError)]

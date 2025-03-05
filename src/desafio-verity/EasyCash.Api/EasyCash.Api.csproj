@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EasyCash.Authorization.Provider\EasyCash.Authorization.Provider.csproj" />
     <ProjectReference Include="..\EasyCash.Background.Jobs\EasyCash.Background.Jobs.csproj" />
     <ProjectReference Include="..\EasyCash.Command.Store\EasyCash.Command.Store.csproj" />
     <ProjectReference Include="..\EasyCash.Command\EasyCash.Command.csproj" />

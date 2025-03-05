@@ -75,7 +75,7 @@ consolidado diário cair.
 # Definindo cache e mensageria
 - Escolhi o Redis para esse trabalho. Foi escolhido o redis como ferramenta, pois ele é amplamente utilizado, é simples de iniciar e tem uma comunidade enorme, é escalável e possui integrado a ele varios recursos que precisamos nesse tipo de aplicação.
 - Redis streams para mensageria para garantir resiliência nas aplicações garantindo que caso tenha alguma indisponibilidade nenhuma mensagem seja perdida e possa ser consumida quando a aplicação voltar a ficar online.
-- Não vejo sentido em cogitar qualquer outra ferramenta para cache distribuido. (definiremos estratégias de cache posteriormente em cada funcionalidade.)
+- Não vejo sentido em cogitar qualquer outra ferramenta para cache distribuido.
 
 # Observabilidade
 
@@ -439,6 +439,7 @@ sequenceDiagram
 
 ## Considerações adicionais:
 
+- Quis manter meais simples, mas com mais tempo teria feito um cadastro de caixas e vincular o caixa à transação pra identificação, abertura e fechamento de caixas, job para fechar caixas automaticamente no encerramento do dia caso não tenham sido fechados manualmente.
 - Backup dos bancos de dados, definir frequencia e estratégias.
 - Penso em estratégias de retry para consumo de mensagens que eventualmente ocorrerem problemas aplicando conceito de dead letter queues e retry com backoff exponencial, não irei fazer isso nesse teste devido a complexidade.
 - Criar pipeline CI

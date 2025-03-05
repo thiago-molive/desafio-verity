@@ -3,7 +3,6 @@ using EasyCash.Api.ConsumerInitializer;
 using EasyCash.Api.Extensions;
 using EasyCash.Api.OpenApi;
 using EasyCash.Api.Policyes;
-using EasyCash.Authorization.Provider;
 using EasyCash.Background.Jobs;
 using EasyCash.Command;
 using EasyCash.Command.Store;
@@ -30,7 +29,6 @@ builder.Services.AddInfrastructureHealthCheckProvider(builder.Configuration);
 builder.Services.AddInfrastructureCachingProvider(builder.Configuration);
 builder.Services.AddInfrastructureBackgroundJobs(builder.Configuration);
 builder.Services.AddInfrastructureAuthentication(builder.Configuration);
-builder.Services.AddInfrastructureAuthorization();
 
 builder.Services.AddSingleton<IIntegrationConsumerInitializer, IntegrationConsumerInitializer>();
 
@@ -62,8 +60,6 @@ if (app.Environment.IsDevelopment())
             string url = $"/swagger/{description.GroupName}/swagger.json";
             string name = description.GroupName.ToUpperInvariant();
             options.SwaggerEndpoint(url, name);
-
-            options.OAuthClientId(builder.Configuration["Keycloak:AuthClientImplicitFlow"]);
         }
     });
 }
