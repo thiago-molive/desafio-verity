@@ -284,6 +284,28 @@ sequenceDiagram
 
 ```
 
+## Autenticação e autorização flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant IdentityProvider as Identity Provider
+    participant Application as Application
+    participant CustomClaimsTransformation as CustomClaimsTransformation
+    participant PermissionAuthorizationHandler as PermissionAuthorizationHandler
+
+    User ->> IdentityProvider: 1. Authenticate
+    IdentityProvider -->> User: 2. Access token
+    User ->> Application: 3. API call with access token
+    activate Application
+    Application ->> CustomClaimsTransformation: 4. Claims transformation
+    CustomClaimsTransformation ->> Application: 5. Return
+    Application ->> PermissionAuthorizationHandler: 6. Authorize
+    PermissionAuthorizationHandler ->> Application: 7. Return
+    Application -->> User: 8. API response
+    deactivate Application
+```
+
 
 # Transaction flow
 
