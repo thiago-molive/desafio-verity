@@ -23,3 +23,9 @@ Content-Type: application/json
 {
   "date": "2025-03-03"
 }
+
+### Relatorio por datas
+GET {{EasyCash.Report.Api_HostAddress}}/api/v1/Consolidations?StartDate=2025-03-03&EndDate=2025-03-05
+Accept: application/json
+Authorization: Bearer {{AccessToken}}
+Content-Type: application/json

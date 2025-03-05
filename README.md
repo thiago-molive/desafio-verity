@@ -1,10 +1,15 @@
-# como rodar localmente
+# Como rodar localmente
 - tenha certeza de que possui o docker com docker-compose instalado, caso não possua pode seguir um tutorial: [instação docker](https://github.com/codeedu/wsl2-docker-quickstart)
-- na pasta raiz do projeto tem um docker-compose, então abra no terminal ou powershell e rode o commando ``` docker-compose up -d ``` e rode o projeto pelo visual studio usando o kestrel **(não pelo docker por causa do keycloak, teria que alterar as configurações do client)**.
+- na pasta raiz do projeto tem um docker-compose, então abra no terminal ou powershell e rode o commando ``` docker-compose up -d ``` 
 - Aguarde um pouco até os serviços iniciarem, pode demorar um pouco na primeira vez.
-- O projeto irá estar rodando em ``` https://localhost:7152/swagger ```
+- Rode o projeto pelo visual studio usando o kestrel **(não pelo docker por causa do keycloak, teria que alterar as configurações do client)**.
+  - Configure as api's para rodar simultanêamente. Clique com o botão direito no projeto selecione "Configure Startup Projects..." na janela que vai se abrir clique no checkbox "Multiple Startup Projects" e no action muda para "Start" nas aplicações EasyCash.Api e EasyCash.Report.Api, aplique as mudanças.
+- Os projetos irão estar rodando em ``` https://localhost:7152/swagger ``` e ``` https://localhost:7141/swagger ``` (para https) conforme configurado no launchSettings
+
+Os serviços necessarios e database são criados pelo docker-compose, e já estão com a importação de informações necessarias para funcionamento, caso precise de ajuda pode abrir uma issue.
 
 - Deixei um ``` EasyCash.Api.http ``` na raiz da api para criar usuario e criar uma transação, pode logar com o user: test@easycash.com.br e senha: 123456 ou pode criar um user direto no swagger (em select a definition trocar para users).
+- Deixei um ``` EasyCash.Report.Api.http ``` na raiz do projeto de report também com requests basicos.
 
 ## Desafio proposto:
 
@@ -32,6 +37,23 @@ SOLID e etc)
 consolidado diário cair. 
 - Em dias de picos, o serviço de consolidado diário recebe
 50 requisições por segundo, com no máximo 5% de perda de requisições.
+
+
+
+# O que esperar da aplicação após executar?
+
+**Serviço de transações**
+Você vai precisar criar um usuario e começar a fazer requests de transações na api ``` EasyCash.Api ``` essas requisições irão apenas validar os dados de entrada, postar um evento de integração e devolver o request com status code 200 em caso de sucesso ou erros de validação em caso de erros.
+Após postar o evento de integração existe um background consumer que irá ler da fila e gravar no banco de dados na tabela de transações da aplicação ``` EasyCash.Api ```
+
+**Serviço de consolidação (chamei de Report)**
+O evento de integração (gerado pela api de transações) é consumido pela aplicação ``` EasyCash.Report.Api ``` que vai gravar em sua tabela as informações de que precisa da transação para gerar a consolidação diária.
+Ao final de cada dia irá rodar um job que irá chamar o serviço de consolidação diária pro dia anterior (coloquei pra rodar sempre às 00:05).
+  O serviço de consolidação irá calcular os creditos e débitos e o saldo final e gravar na tabela de consolidação.
+  Deixei um endpoint pra chamar o serviço de consolidação sem precisar esperar pelo job (apenas pra testes)
+Deixei um endpoint de get para gerar um "relatório" por datas.
+
+
 
 # Definindo a tecnologia e arquitetura Para estar de acordo com os requisitos técnicos
 
