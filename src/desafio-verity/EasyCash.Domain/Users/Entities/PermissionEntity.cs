@@ -19,6 +19,8 @@ public sealed class PermissionEntity : EntityBase<Guid>
 
     public string Permission => $"{Module.GetName()}:{Action.GetName()}";
 
+    private PermissionEntity() { }
+
     private PermissionEntity(Guid id, string name, EModules module, EActions action, string description = "")
     {
         Id = id;
@@ -40,45 +42,5 @@ public sealed class PermissionEntity : EntityBase<Guid>
     protected override void Validate()
     {
 
-    }
-
-    public void UpdateName(string name)
-    {
-        if (Name == name)
-            return;
-
-        Name = name;
-
-        Validate();
-    }
-
-    public void UpdateDescription(string description)
-    {
-        if (Description == description)
-            return;
-
-        Description = description;
-
-        Validate();
-    }
-
-    public void UpdateModule(EModules module)
-    {
-        if (Module == module)
-            return;
-
-        Module = module;
-
-        Validate();
-    }
-
-    public void UpdateAction(EActions action)
-    {
-        if (Action == action)
-            return;
-
-        Action = action;
-
-        Validate();
     }
 }

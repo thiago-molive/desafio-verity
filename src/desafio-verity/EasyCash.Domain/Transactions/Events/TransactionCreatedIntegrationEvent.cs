@@ -1,8 +1,8 @@
 ﻿using EasyCash.Domain.Abstractions;
-using EasyCash.Domain.CashFlow.Entities;
-using EasyCash.Domain.CashFlow.Enums;
+using EasyCash.Domain.Transactions.Entities;
+using EasyCash.Domain.Transactions.Enums;
 
-namespace EasyCash.Domain.CashFlow.Events;
+namespace EasyCash.Domain.Transactions.Events;
 
 public sealed class TransactionCreatedIntegrationEvent : IntegrationEventBase
 {

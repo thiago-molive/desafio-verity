@@ -1,4 +1,4 @@
-﻿namespace EasyCash.Domain.CashFlow.Enums;
+﻿namespace EasyCash.Domain.Transactions.Enums;
 
 public enum ETransactionType
 {

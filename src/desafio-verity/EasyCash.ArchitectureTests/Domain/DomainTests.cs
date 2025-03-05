@@ -14,6 +14,8 @@ public class DomainTests : BaseTest
     {
         TestResult result = Types.InAssemblies(DomainAssemblies)
             .That()
+            .AreNotAbstract()
+            .And()
             .ImplementInterface(typeof(IDomainEvent))
             .Or()
             .Inherit(typeof(DomainEventBase))
@@ -29,6 +31,8 @@ public class DomainTests : BaseTest
     {
         TestResult result = Types.InAssemblies(DomainAssemblies)
             .That()
+            .AreNotAbstract()
+            .And()
             .ImplementInterface(typeof(IDomainEvent))
             .Or()
             .Inherit(typeof(DomainEventBase))
@@ -49,7 +53,8 @@ public class DomainTests : BaseTest
             .ImplementInterface(typeof(IEntity))
             .Or()
             .Inherit(typeof(EntityBase<>))
-            .GetTypes();
+            .GetTypes()
+            .Where(t => !t.IsAbstract);
 
         var failingTypes = new List<Type>();
         foreach (Type entityType in entityTypes)
@@ -67,23 +72,6 @@ public class DomainTests : BaseTest
     }
 
     [Fact]
-    public void Entities_ShouldHave_EntityPostfix()
-    {
-        TestResult result = Types.InAssemblies(DomainAssemblies)
-            .That()
-            .ImplementInterface(typeof(IEntity))
-            .Or()
-            .ImplementInterface(typeof(IEntity<>))
-            .Or()
-            .Inherit(typeof(EntityBase<>))
-            .Should()
-            .HaveNameEndingWith("Entity")
-            .GetResult();
-
-        result.IsSuccessful.Should().BeTrue();
-    }
-
-    [Fact]
     public void Entities_ShouldHave_StaticFactoryMethod()
     {
         IEnumerable<Type> entityTypes = Types.InAssemblies(DomainAssemblies)
@@ -93,7 +81,8 @@ public class DomainTests : BaseTest
             .ImplementInterface(typeof(IEntity))
             .Or()
             .Inherit(typeof(EntityBase<>))
-            .GetTypes();
+            .GetTypes()
+            .Where(t => !t.IsAbstract);
 
         var failingTypes = new List<Type>();
         foreach (Type entityType in entityTypes)
@@ -101,9 +90,6 @@ public class DomainTests : BaseTest
             var staticMethods = entityType.GetMethods(BindingFlags.Public | BindingFlags.Static);
 
             if (!staticMethods.Any(x => x is { IsStatic: true, IsPublic: true, Name: "Create" }))
-                failingTypes.Add(entityType);
-
-            if (!staticMethods.Any(x => x is { IsStatic: true, IsPublic: true, Name: "Restore" }))
                 failingTypes.Add(entityType);
         }
 

@@ -1,6 +1,6 @@
 ﻿using EasyCash.Domain.Abstractions.Interfaces;
-using EasyCash.Domain.CashFlow.Events;
-using EasyCash.Domain.CashFlow.Interfaces;
+using EasyCash.Domain.Transactions.Events;
+using EasyCash.Domain.Transactions.Interfaces;
 using MediatR;
 
 namespace EasyCash.Command.Transactions.Create.Events;

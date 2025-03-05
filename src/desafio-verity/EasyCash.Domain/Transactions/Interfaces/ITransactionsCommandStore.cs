@@ -1,9 +1,9 @@
 ﻿using EasyCash.Domain.Abstractions.Repository;
-using EasyCash.Domain.CashFlow.Entities;
+using EasyCash.Domain.Transactions.Entities;
 
-namespace EasyCash.Domain.CashFlow.Interfaces;
+namespace EasyCash.Domain.Transactions.Interfaces;
 
 public interface ITransactionsCommandStore : IGetRepository<TransactionEntity, Guid>, IAddRepository<TransactionEntity, Guid>
 {
-    
+
 }

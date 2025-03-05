@@ -1,9 +1,9 @@
 ﻿using EasyCash.Domain.Abstractions;
 using EasyCash.Domain.Abstractions.Exceptions;
-using EasyCash.Domain.CashFlow.Enums;
-using EasyCash.Domain.CashFlow.ValueObjects;
+using EasyCash.Domain.Transactions.Enums;
+using EasyCash.Domain.Transactions.ValueObjects;
 
-namespace EasyCash.Domain.CashFlow.Entities;
+namespace EasyCash.Domain.Transactions.Entities;
 
 public sealed class TransactionEntity : EntityBase<Guid>
 {
@@ -39,7 +39,7 @@ public sealed class TransactionEntity : EntityBase<Guid>
             Type = type,
             Amount = Money.FromDecimal(amount),
             Category = category,
-            Date = date ?? DateTimeOffset.Now.Date,
+            Date = date ?? DateTimeOffset.Now,
             CreatedAt = DateTimeOffset.Now
         };
 
@@ -61,6 +61,8 @@ public sealed class TransactionEntity : EntityBase<Guid>
         Category = category;
         Date = date.Date;
         UpdatedAt = DateTime.Now;
+
+        Validate();
     }
 
     protected override void Validate()

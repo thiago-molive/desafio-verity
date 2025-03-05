@@ -1,8 +1,8 @@
 ﻿using EasyCash.Command.Transactions.Create.Events;
 using EasyCash.Domain.Abstractions.Interfaces;
 using EasyCash.Domain.Abstractions.Messaging.Commands;
-using EasyCash.Domain.CashFlow.Entities;
-using EasyCash.Domain.CashFlow.Events;
+using EasyCash.Domain.Transactions.Entities;
+using EasyCash.Domain.Transactions.Events;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 

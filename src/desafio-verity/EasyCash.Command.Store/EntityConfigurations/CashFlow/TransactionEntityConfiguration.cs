@@ -1,6 +1,6 @@
 ﻿using EasyCash.Command.Store.Constants;
-using EasyCash.Domain.CashFlow.Entities;
-using EasyCash.Domain.CashFlow.ValueObjects;
+using EasyCash.Domain.Transactions.Entities;
+using EasyCash.Domain.Transactions.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

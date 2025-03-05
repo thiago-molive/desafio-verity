@@ -1,5 +1,4 @@
 ﻿using EasyCash.Domain.Abstractions;
-using EasyCash.Domain.Extensions;
 
 namespace EasyCash.Domain.Users.Entities;
 
@@ -40,49 +39,5 @@ public sealed class RoleEntity : EntityBase<Guid>
     protected override void Validate()
     {
 
-    }
-
-    public void Activate()
-    {
-        IsActive = true;
-
-        Validate();
-    }
-
-    public void Deactivate()
-    {
-        IsActive = false;
-
-        Validate();
-    }
-
-    public void UpdateName(string name)
-    {
-        if (Name == name)
-            return;
-
-        Name = name;
-
-        Validate();
-    }
-
-    public void UpdateDescription(string description)
-    {
-        if (Description == description)
-            return;
-
-        Description = description;
-
-        Validate();
-    }
-
-    public void AddPermission(PermissionEntity permission)
-    {
-        Permissions.AddIfNotContains(permission);
-    }
-
-    public void RemovePermission(PermissionEntity permission)
-    {
-        Permissions.Remove(permission);
     }
 }

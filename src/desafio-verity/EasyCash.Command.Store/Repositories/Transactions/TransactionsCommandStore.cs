@@ -1,6 +1,6 @@
 ﻿using EasyCash.Command.Store.Contexts;
-using EasyCash.Domain.CashFlow.Entities;
-using EasyCash.Domain.CashFlow.Interfaces;
+using EasyCash.Domain.Transactions.Entities;
+using EasyCash.Domain.Transactions.Interfaces;
 
 namespace EasyCash.Command.Store.Repositories.Transactions;
 

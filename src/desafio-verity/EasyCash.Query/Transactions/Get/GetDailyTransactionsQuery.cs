@@ -1,5 +1,5 @@
 ﻿using EasyCash.Domain.Abstractions.Messaging.Queries.PagedQueries;
-using EasyCash.Domain.CashFlow.Enums;
+using EasyCash.Domain.Transactions.Enums;
 
 namespace EasyCash.Query.Transactions.Get;
 

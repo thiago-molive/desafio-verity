@@ -1,4 +1,4 @@
-﻿namespace EasyCash.Domain.CashFlow.ValueObjects;
+﻿namespace EasyCash.Domain.Transactions.ValueObjects;
 
 public record Money
 {

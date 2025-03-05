@@ -1,5 +1,5 @@
 ﻿using EasyCash.Domain.Abstractions;
-using EasyCash.Domain.CashFlow.Events;
+using EasyCash.Domain.Transactions.Events;
 
 namespace EasyCash.Api.ConsumerInitializer;
 

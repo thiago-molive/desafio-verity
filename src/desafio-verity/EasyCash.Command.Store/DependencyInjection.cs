@@ -4,7 +4,7 @@ using EasyCash.Command.Store.Repositories.Transactions;
 using EasyCash.Command.Store.Repositories.Users;
 using EasyCash.Domain.Abstractions.Idempotency.Interfaces;
 using EasyCash.Domain.Abstractions.Interfaces;
-using EasyCash.Domain.CashFlow.Interfaces;
+using EasyCash.Domain.Transactions.Interfaces;
 using EasyCash.Domain.Users.Interfaces;
 using EntityFramework.Exceptions.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
