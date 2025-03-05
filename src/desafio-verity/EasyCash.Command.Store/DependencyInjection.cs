@@ -31,8 +31,6 @@ public static class DependencyInjection
         services.AddScoped<ITransactionsCommandStore, TransactionsCommandStore>();
 
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IPermissionRepository, PermissionRepository>();
-        services.AddScoped<IRoleRepository, RoleRepository>();
 
         return services;
     }

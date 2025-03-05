@@ -41,7 +41,7 @@ public class UsersController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("register")]
-    [ProducesResponseType(typeof(RegisterUserCommandResult), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(RegisterUserCommandResult), (int)HttpStatusCode.Created)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ExceptionHandlingMiddleware.ExceptionDetails), (int)HttpStatusCode.InternalServerError)]
     public async Task<IActionResult> Register(

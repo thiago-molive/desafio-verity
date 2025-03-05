@@ -7,11 +7,12 @@ namespace EasyCash.Api.Extensions;
 
 internal static class SeedDataExtensions
 {
-    public static void SeedData(this IApplicationBuilder app)
+    public static void SeedData(this IApplicationBuilder app, IHostEnvironment env)
     {
         using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-        TryCreateTestUser(scope);
+        if (env.IsDevelopment())
+            TryCreateTestUser(scope);
     }
 
     private static void TryCreateTestUser(IServiceScope scope)

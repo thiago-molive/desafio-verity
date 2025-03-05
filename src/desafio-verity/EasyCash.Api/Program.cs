@@ -70,7 +70,7 @@ if (app.Environment.IsDevelopment())
 
 app.ApplyMigrations();
 
-app.SeedData();
+//app.SeedData(app.Environment);
 
 app.UseCustomExceptionHandler();
 
@@ -92,3 +92,8 @@ app.MapHealthChecks("health", new HealthCheckOptions
 });
 
 app.Run();
+
+namespace EasyCash.Api
+{
+    public partial class Program;
+}
