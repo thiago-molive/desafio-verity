@@ -62,7 +62,8 @@
         "composites": {
           "realm": [
             "offline_access",
-            "uma_authorization"
+            "uma_authorization",
+            "collaborator:all"
           ],
           "client": {
             "account": [
@@ -79,6 +80,15 @@
         "id": "d8f66307-aa71-447f-a21f-a2a317cc1538",
         "name": "offline_access",
         "description": "${role_offline-access}",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "EasyCash",
+        "attributes": {}
+      },
+      {
+        "id": "b02ca6e1-5e9e-4f52-9c1a-b1a883649213",
+        "name": "collaborator:all",
+        "description": "Generic app role",
         "composite": false,
         "clientRole": false,
         "containerId": "EasyCash",

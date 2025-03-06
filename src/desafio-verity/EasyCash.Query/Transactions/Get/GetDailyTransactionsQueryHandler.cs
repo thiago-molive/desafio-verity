@@ -19,7 +19,7 @@ internal sealed class GetDailyTransactionsQueryHandler : IQueryHandler<GetDailyT
     }
 }
 
-public sealed class GetDailyTransactionsQueryValidator : AbstractValidator<GetDailyTransactionsQuery>
+internal sealed class GetDailyTransactionsQueryValidator : AbstractValidator<GetDailyTransactionsQuery>
 {
     public GetDailyTransactionsQueryValidator()
     {
